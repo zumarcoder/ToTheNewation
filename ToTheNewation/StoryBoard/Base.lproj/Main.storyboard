@@ -646,7 +646,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-0b-rrd">
                                                 <rect key="frame" x="326" y="400" width="68" height="50"/>
@@ -686,25 +686,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FTD-6q-jlm">
-                                                <rect key="frame" x="20" y="120" width="374" height="50"/>
+                                                <rect key="frame" x="60" y="120" width="294" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cdr-t4-WAu"/>
                                                 </constraints>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="mailEditTextEditingDidEnd:" destination="Swn-tb-JiH" eventType="editingDidEnd" id="wAh-yA-P0T"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yaB-Fm-YkY">
-                                                <rect key="frame" x="20" y="190" width="374" height="50"/>
+                                                <rect key="frame" x="60" y="190" width="294" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="tmx-TJ-h69"/>
                                                 </constraints>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJR-oC-uGz">
-                                                <rect key="frame" x="334" y="260" width="60" height="50"/>
+                                                <rect key="frame" x="294" y="260" width="60" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="M4t-as-WVN"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="pjK-DM-zKy"/>
@@ -719,7 +722,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpp-Tm-V8r">
-                                                <rect key="frame" x="20" y="260" width="160" height="50"/>
+                                                <rect key="frame" x="60" y="260" width="160" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="4Ti-lL-4QZ"/>
                                                     <constraint firstAttribute="height" constant="50" id="KS6-jc-UTV"/>
@@ -733,19 +736,32 @@
                                                     <action selector="onForgetPasswordButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="Bxh-e7-p2G"/>
                                                 </connections>
                                             </button>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itU-zI-MxM">
+                                                <rect key="frame" x="354" y="120" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="ukx-7S-iL5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="FTD-6q-jlm" firstAttribute="top" secondItem="5we-Lz-RUe" secondAttribute="top" constant="120" id="4Yc-Q6-TOE"/>
-                                            <constraint firstItem="FTD-6q-jlm" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="20" id="Bb8-W0-fdn"/>
+                                            <constraint firstItem="itU-zI-MxM" firstAttribute="top" secondItem="FTD-6q-jlm" secondAttribute="top" id="784-d2-2gX"/>
+                                            <constraint firstItem="itU-zI-MxM" firstAttribute="leading" secondItem="FTD-6q-jlm" secondAttribute="trailing" id="7fp-iy-x8F"/>
+                                            <constraint firstItem="FTD-6q-jlm" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="60" id="Bb8-W0-fdn"/>
                                             <constraint firstItem="Kpp-Tm-V8r" firstAttribute="top" secondItem="yaB-Fm-YkY" secondAttribute="bottom" constant="20" id="HlV-Hu-x3F"/>
                                             <constraint firstItem="Kpp-Tm-V8r" firstAttribute="leading" secondItem="yaB-Fm-YkY" secondAttribute="leading" id="I6d-fu-UqO"/>
+                                            <constraint firstItem="itU-zI-MxM" firstAttribute="bottom" secondItem="FTD-6q-jlm" secondAttribute="bottom" id="Qdf-zs-gcy"/>
                                             <constraint firstItem="yaB-Fm-YkY" firstAttribute="top" secondItem="FTD-6q-jlm" secondAttribute="bottom" constant="20" id="XWk-3A-wNd"/>
                                             <constraint firstItem="LJR-oC-uGz" firstAttribute="top" secondItem="yaB-Fm-YkY" secondAttribute="bottom" constant="20" id="aXM-fT-HaA"/>
-                                            <constraint firstItem="yaB-Fm-YkY" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="20" id="ik5-de-Tpb"/>
-                                            <constraint firstAttribute="trailing" secondItem="yaB-Fm-YkY" secondAttribute="trailing" constant="20" id="mtp-hi-gqf"/>
+                                            <constraint firstItem="itU-zI-MxM" firstAttribute="height" secondItem="FTD-6q-jlm" secondAttribute="height" id="epl-AS-ZuL"/>
+                                            <constraint firstItem="yaB-Fm-YkY" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="60" id="ik5-de-Tpb"/>
+                                            <constraint firstAttribute="trailing" secondItem="yaB-Fm-YkY" secondAttribute="trailing" constant="60" id="mtp-hi-gqf"/>
                                             <constraint firstItem="LJR-oC-uGz" firstAttribute="trailing" secondItem="yaB-Fm-YkY" secondAttribute="trailing" id="poB-7c-bGt"/>
-                                            <constraint firstAttribute="trailing" secondItem="FTD-6q-jlm" secondAttribute="trailing" constant="20" id="xol-oP-vzb"/>
+                                            <constraint firstAttribute="trailing" secondItem="FTD-6q-jlm" secondAttribute="trailing" constant="60" id="xol-oP-vzb"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -807,6 +823,7 @@
                     <navigationItem key="navigationItem" id="Wqa-GW-mcg"/>
                     <connections>
                         <outlet property="emailEditTextLogin" destination="FTD-6q-jlm" id="sis-KB-zes"/>
+                        <outlet property="emailValidatedLabel" destination="itU-zI-MxM" id="G8D-qX-xdZ"/>
                         <outlet property="firstNameEditTextSignup" destination="vTP-i3-jjx" id="fIK-bR-iay"/>
                         <outlet property="forgetPasswordButtonLogin" destination="Kpp-Tm-V8r" id="0dF-1a-Jmj"/>
                         <outlet property="lastnameEditTextSignup" destination="xiZ-br-8aB" id="Zgt-lZ-Fw9"/>
@@ -824,7 +841,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T73-Hg-ITR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136" y="1535"/>
+            <point key="canvasLocation" x="134.78260869565219" y="1534.2391304347827"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="iWM-hc-6zH">

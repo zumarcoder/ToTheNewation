@@ -81,6 +81,7 @@
 		381FCB2C2269E927002B5E96 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				38E91A3D22A7B762008241D9 /* Manager */,
 				384D6ADF22A51DBA0002543C /* XibClass */,
 				384D6ADB22A4FC520002543C /* AgreementViewController.swift */,
 				384D6ADD22A506720002543C /* RootTabBarController.swift */,
@@ -90,7 +91,6 @@
 				38D22F1422A0568000621CB9 /* PopoutGalleryImage.swift */,
 				381FCB252269DD7D002B5E96 /* MapViewController.swift */,
 				381FCB292269DDD4002B5E96 /* LoginSignupViewController.swift */,
-				3836386C22A6E1D800FDCA90 /* TransparentNavBar.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -143,6 +143,14 @@
 				386DBD012269933F00C2DA10 /* Info.plist */,
 			);
 			path = ToTheNewation;
+			sourceTree = "<group>";
+		};
+		38E91A3D22A7B762008241D9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3836386C22A6E1D800FDCA90 /* TransparentNavBar.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		38EA0A03226D87FD002E49CD /* View */ = {
