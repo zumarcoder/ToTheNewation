@@ -25,6 +25,15 @@ class LoginSignupViewController: UIViewController {
     @IBOutlet weak var passwordEditTextSignup: UITextField!
     @IBOutlet weak var signupinsideButton: UIButton!
     @IBOutlet weak var emailValidatedLabel: UILabel!
+    @IBOutlet weak var loggedinUIView: UIView!
+    @IBOutlet weak var profilePictureLogedinView: UIView!
+    @IBOutlet weak var fNamelNameLabelLogedInView: UILabel!
+    @IBOutlet weak var userIDlabelLogedInView: UILabel!
+    @IBOutlet weak var subscribtionLogedInLabel: UILabel!
+    @IBOutlet weak var logoutButtonLogedInView: UIButton!
+    
+    @IBOutlet weak var activityIndicatorLoginView: UIActivityIndicatorView!
+    
     
     var textField: UITextField?
     var emailValidationCode: Int!
@@ -34,10 +43,21 @@ class LoginSignupViewController: UIViewController {
     var forgetPasswordCode : Int!
     var forgetPasswordMessage : String!
     
+    struct LoginData {
+        var firstName : String!
+        var lastName : String!
+        var iID : String!
+        var Subscribtion : String!
+    }
+    var loginparams = LoginData(firstName: "", lastName: "", iID: "", Subscribtion: "")
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.rootViewOfLoginAndSignup, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
+        profilePictureLogedinView.roundTheView(corner: profilePictureLogedinView.frame.height/2)
+        logoutButtonLogedInView.roundTheView(corner: 5)
         self.view.addGestureRecognizer(tap)
     }
     
@@ -77,10 +97,108 @@ class LoginSignupViewController: UIViewController {
     
     
     @IBAction func onLoginButtonTap(_ sender: Any) {
+        self.activityIndicatorLoginView.isHidden = false
+        let mail = emailEditTextLogin.text!
+        let password = passwordEditTextLogin.text!
+        
+        let parameters = [
+            "mail" : mail ,
+            "password" : password,
+            "client_secret" : "abcde12345",
+            "client_id" : "ec7c3bde-9f51-4113-9ecf-6ca6fd03b66b",
+            "scope" : "ios",
+            "grant_type" : "password"]
+        
+        func getPostDataAttributes(params:[String:String]) -> Data
+        {
+            var data = Data()
+            for(key, value) in params
+            {
+                let string = "--CuriousWorld\r\n".data(using: .utf8)
+                data.append(string!)
+                data.append(String.init(format: "Content-Disposition: form-data; name=%@\r\n\r\n", key).data(using: .utf8)!)
+                data.append(String.init(format: "%@\r\n", value).data(using: .utf8)!)
+                data.append(String.init(format: "--CuriousWorld--\r\n").data(using: .utf8)!)
+            }
+            return data
+        }
+        
+        let parametersData = getPostDataAttributes(params: parameters)
+        
+        guard let url = URL(string: "https://qa.curiousworld.com/api/v2/Login?_format=json")
+            else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else
+        {
+            return
+        }
+        request.httpBody = parametersData
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) {
+            (data , response , error) in
+            if let data = data
+            {
+                do
+                {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                    {
+                        if let userData = json["data"] as? [String : Any]
+                        {
+                            guard let firstName = userData["firstName"] as? String else {
+                                return
+                            }
+                            self.loginparams.firstName = firstName
+                            print(firstName)
+                            guard let lastName = userData["lastName"] as? String else {
+                            return
+                            }
+                            self.loginparams.lastName = lastName
+                            
+                            guard let uID = userData["uid"] as? String else {
+                                return
+                            }
+                            self.loginparams.iID = uID
+                            
+                            guard let subscriptionStatus = userData["subscriptionStatus"] as? String else {
+                                return
+                            }
+                            self.loginparams.Subscribtion = subscriptionStatus
+                            self.showProfileView()
+                        }
+                    }
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }.resume()
+        
     }
     
+    func showProfileView()
+    {
+        DispatchQueue.main.async {
+            self.loggedinUIView.isHidden = false
+            self.activityIndicatorLoginView.isHidden = true
+            self.rootViewOfLoginAndSignup.isHidden = true
+            self.loginButton.isHidden = true
+            self.signUpButton.isHidden = true
+            self.fNamelNameLabelLogedInView.text = "\(self.loginparams.firstName!)  \(self.loginparams.lastName!)"
+            self.userIDlabelLogedInView.text = self.loginparams.iID!
+            self.subscribtionLogedInLabel.text = self.loginparams.Subscribtion
+            
+        }
+       
+    }
     
     @IBAction func onSignupInsideButtonTap(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "loggedin")
         let firstname = firstNameEditTextSignup.text!
         let lastname = lastnameEditTextSignup.text!
         let email = mailEditTextSignup.text!
@@ -284,7 +402,6 @@ class LoginSignupViewController: UIViewController {
 
     func forgetPaswordApiResponseHandling()
     {
-                    //so that UI doesnot get blocked
                     DispatchQueue.main.async {
                         
                         if self.forgetPasswordCode == 0
@@ -301,5 +418,16 @@ class LoginSignupViewController: UIViewController {
                     }
                 }
         }
+
+    @IBAction func onLogOutButtonTap(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "loggedin")
+        loggedinUIView.isHidden = true
+        rootViewOfLoginAndSignup.isHidden = false
+        loginButton.isHidden = false
+        signUpButton.isHidden = false
+    }
+    
+
+
 }
 
