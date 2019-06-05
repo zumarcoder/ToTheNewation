@@ -284,7 +284,7 @@ class LoginSignupViewController: UIViewController {
 
     func forgetPaswordApiResponseHandling()
     {
-                    
+                    //so that UI doesnot get blocked
                     DispatchQueue.main.async {
                         
                         if self.forgetPasswordCode == 0
