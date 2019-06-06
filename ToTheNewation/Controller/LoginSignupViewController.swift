@@ -32,7 +32,7 @@ class LoginSignupViewController: UIViewController {
     @IBOutlet weak var subscribtionLogedInLabel: UILabel!
     @IBOutlet weak var logoutButtonLogedInView: UIButton!
     @IBOutlet weak var activityIndicatorLoginView: UIActivityIndicatorView!
-    
+    @IBOutlet weak var toastMessageLabel: UILabel!
     
     var textField: UITextField?
     var emailValidationCode: Int!
@@ -41,6 +41,9 @@ class LoginSignupViewController: UIViewController {
     var signupMessage : String!
     var forgetPasswordCode : Int!
     var forgetPasswordMessage : String!
+    var loginValidationCode : Int!
+    var loginValidationMessage : String!
+    
     
     struct LoginData {
         var firstName : String!
@@ -62,7 +65,7 @@ class LoginSignupViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "Profile"
+        self.navigationController?.navigationBar.topItem?.title = "Login"
         if(UserDefaults.standard.bool(forKey: "loggedin"))
         {
             showProfileView()
@@ -77,12 +80,18 @@ class LoginSignupViewController: UIViewController {
     @IBAction func onTopLoginButtonTap(_ sender: Any) {
         loginView.isHidden = false
         signupView.isHidden = true
+        self.navigationController?.navigationBar.topItem?.title = "Login"
+        loginButton.layer.backgroundColor = UIColor.lightGray.cgColor
+        signUpButton.layer.backgroundColor = UIColor.white.cgColor
     }
     
     
     @IBAction func onTopSignupButonTap(_ sender: Any) {
         loginView.isHidden = true
         signupView.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = "Sign Up"
+        loginButton.layer.backgroundColor = UIColor.white.cgColor
+        signUpButton.layer.backgroundColor = UIColor.lightGray.cgColor
     }
     
     
@@ -139,10 +148,16 @@ class LoginSignupViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else
-        {
-            return
-        }
+        
+        
+        
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else
+//        {
+//            return
+//        }
+        
+        
+        
         request.httpBody = parametersData
         let session = URLSession.shared
         
@@ -180,8 +195,23 @@ class LoginSignupViewController: UIViewController {
                             UserDefaults.standard.set(lastName, forKey: "ln")
                             UserDefaults.standard.set(uID, forKey: "uid")
                             UserDefaults.standard.set(subscriptionStatus, forKey: "sub")
-                            self.showProfileView()
-                                                    }
+                        }
+                        if let statusmsg = json["status"] as? [String : Any]
+                        {
+                            guard let codeResponse = statusmsg["code"] as? Int else
+                            {
+                                return
+                            }
+                            self.loginValidationCode = codeResponse
+                            
+                            guard let messageResponse = statusmsg["message"] as? String
+                            else
+                            {
+                                return
+                            }
+                            self.loginValidationMessage = messageResponse
+                            self.loginApiHandler()
+                        }
                     }
                 }
                 catch
@@ -193,9 +223,29 @@ class LoginSignupViewController: UIViewController {
         
     }
     
+    func loginApiHandler()
+    {
+        if(loginValidationCode == 1)
+        {
+            DispatchQueue.main.async {
+                self.showProfileView()
+                self.toastMessageLabel.toastMessageLabel(message: self.loginValidationMessage)
+            }
+        }
+        else
+        {
+            DispatchQueue.main.async {
+                self.activityIndicatorLoginView.isHidden = true
+                self.toastMessageLabel.toastMessageLabel(message: self.loginValidationMessage)
+            }
+           
+        }
+    }
+    
     func showProfileView()
     {
         DispatchQueue.main.async {
+            self.navigationController?.navigationBar.topItem?.title = "Profile"
             self.loggedinUIView.isHidden = false
             self.activityIndicatorLoginView.isHidden = true
             self.rootViewOfLoginAndSignup.isHidden = true
@@ -211,6 +261,7 @@ class LoginSignupViewController: UIViewController {
     
     func hideProfileView()
     {
+        self.navigationController?.navigationBar.topItem?.title = "Login"
         loggedinUIView.isHidden = true
         rootViewOfLoginAndSignup.isHidden = false
         loginButton.isHidden = false
@@ -219,11 +270,12 @@ class LoginSignupViewController: UIViewController {
 
     
     @IBAction func onSignupInsideButtonTap(_ sender: Any) {
+        self.activityIndicatorLoginView.isHidden = false
+        self.signupinsideButton.isEnabled = false
         let firstname = firstNameEditTextSignup.text!
         let lastname = lastnameEditTextSignup.text!
         let email = mailEditTextSignup.text!
         let password = passwordEditTextSignup.text!
-        
         let parameters = ["firstName" : firstname , "lastName" : lastname, "mail" : email , "password" : password ]
         
         guard let url = URL(string: "https://qa.curiousworld.com/api/v2/SignUp")
@@ -380,6 +432,7 @@ class LoginSignupViewController: UIViewController {
                             guard let codeResponseMessage = statusMessage["message"] as? String else {return}
 //                            print("=========================== \(codeResponseMessage)")
                             self.emailMessage = codeResponseMessage
+                            print(self.emailMessage!)
                         }
                     }
                 } catch {
@@ -403,10 +456,7 @@ class LoginSignupViewController: UIViewController {
         else {
                 DispatchQueue.main.async {
                         self.emailValidatedLabel.text = "❌"
-            
-//                let alert1 = UIAlertController(title: "Email", message: "We could not find any account with this email.", preferredStyle:.alert)
-//                alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//                self.present(alert1, animated: true, completion: nil)
+                    self.toastMessageLabel.toastMessageLabel(message: self.emailMessage)
             }
         }
     }
@@ -415,16 +465,26 @@ class LoginSignupViewController: UIViewController {
     {
         if signupValidationCode == 1
         {
-            let alert1 = UIAlertController(title: "Thank You", message: signupMessage , preferredStyle:.alert)
-            alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(alert1, animated: true, completion: nil)
+             DispatchQueue.main.async {
+            self.activityIndicatorLoginView.isHidden = true
+            self.toastMessageLabel.toastMessageLabel(message: self.signupMessage)
+            self.firstNameEditTextSignup.text = ""
+            self.lastnameEditTextSignup.text = ""
+            self.mailEditTextSignup.text = ""
+            self.passwordEditTextSignup.text = ""
+            }
         }
         else
         {
-            let alert1 = UIAlertController(title: "Sorry", message: signupMessage , preferredStyle:.alert)
-            alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(alert1, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                self.activityIndicatorLoginView.isHidden = true
+                self.toastMessageLabel.toastMessageLabel(message: self.signupMessage)
+            }
         }
+        DispatchQueue.main.async {
+            self.signupinsideButton.isEnabled = true
+        }
+        
     }
 
     func forgetPaswordApiResponseHandling()
@@ -433,17 +493,13 @@ class LoginSignupViewController: UIViewController {
                         
                         if self.forgetPasswordCode == 0
                         {
-                            let alert1 = UIAlertController(title: "Ooops...", message: self.forgetPasswordMessage, preferredStyle:.alert)
-                            alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                            self.present(alert1, animated: true, completion: nil)
+                            self.toastMessageLabel.toastMessageLabel(message: "Ooops..! \(self.forgetPasswordMessage!)")
                         }
                         else
                         {
-                        let alert1 = UIAlertController(title: "Password Successfully Sent", message: "Hello! \(self.textField!.text!) \(self.forgetPasswordMessage!)", preferredStyle:.alert)
-                        alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                        self.present(alert1, animated: true, completion: nil)
-                    }
-                }
+                            self.toastMessageLabel.toastMessageLabel(message: "Hello! \(self.textField!.text!) \(self.forgetPasswordMessage!)")
+                  }
+            }
         }
 
     @IBAction func onLogOutButtonTap(_ sender: Any) {
