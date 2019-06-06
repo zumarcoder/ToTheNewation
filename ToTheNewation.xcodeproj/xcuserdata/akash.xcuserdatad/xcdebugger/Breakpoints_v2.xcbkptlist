@@ -63,7 +63,7 @@
                   moduleName = "ToTheNewation"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/akash/Desktop/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
-                  timestampString = "581449716.299816"
+                  timestampString = "581499640.512911"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
@@ -78,7 +78,7 @@
                   moduleName = "ToTheNewation"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/akash/Desktop/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
-                  timestampString = "581449716.303351"
+                  timestampString = "581499640.516434"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
@@ -182,22 +182,6 @@
             endingLineNumber = "16"
             landmarkName = "unknown"
             landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToTheNewation/Controller/LoginSignupViewController.swift"
-            timestampString = "581450418.869419"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "onLoginButtonTap(_:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

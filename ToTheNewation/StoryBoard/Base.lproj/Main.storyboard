@@ -594,7 +594,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TE-L8-jLA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adrian-208892-unsplash" highlightedImage="wyman-h-14843-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="16n-qv-KhB">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16n-qv-KhB">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                     </imageView>
                                 </subviews>
@@ -709,13 +709,13 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcN-rd-znB">
                                         <rect key="frame" x="304" y="491" width="70" height="40"/>
-                                        <color key="backgroundColor" red="0.25873784830000002" green="0.25873784830000002" blue="0.25873784830000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="LZA-En-l92"/>
                                             <constraint firstAttribute="width" constant="70" id="y1M-Td-hxD"/>
                                         </constraints>
                                         <state key="normal" title="Log Out">
-                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="onLogOutButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="Yfk-ug-vNs"/>
@@ -744,8 +744,8 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-Gx-UZP">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="531"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTP-i3-jjx">
-                                                <rect key="frame" x="20" y="120" width="374" height="50"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vTP-i3-jjx">
+                                                <rect key="frame" x="20" y="50" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="tUo-rn-SxW"/>
                                                 </constraints>
@@ -753,8 +753,8 @@
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xiZ-br-8aB">
-                                                <rect key="frame" x="20" y="190" width="374" height="50"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xiZ-br-8aB">
+                                                <rect key="frame" x="20" y="120" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="258-NQ-w80"/>
                                                 </constraints>
@@ -762,17 +762,16 @@
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K9s-Fw-FRs">
-                                                <rect key="frame" x="20" y="260" width="374" height="50"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K9s-Fw-FRs">
+                                                <rect key="frame" x="20" y="190" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ACD-CG-bqX"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.88005672089999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shb-yx-6G4">
-                                                <rect key="frame" x="20" y="330" width="374" height="50"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shb-yx-6G4">
+                                                <rect key="frame" x="20" y="260" width="374" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="chR-fD-FwA"/>
                                                 </constraints>
@@ -781,14 +780,14 @@
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-0b-rrd">
-                                                <rect key="frame" x="326" y="400" width="68" height="50"/>
+                                                <rect key="frame" x="326" y="330" width="68" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="M6a-zf-w31"/>
                                                     <constraint firstAttribute="height" constant="50" id="tfY-sa-GyK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <state key="normal" title="Sign Up">
-                                                    <color key="titleColor" red="0.58314828549999997" green="0.58314828549999997" blue="0.58314828549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="onSignupInsideButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="Ue9-JK-fvF"/>
@@ -807,7 +806,7 @@
                                             <constraint firstAttribute="trailing" secondItem="xiZ-br-8aB" secondAttribute="trailing" constant="20" id="WZl-eR-xNc"/>
                                             <constraint firstItem="K9s-Fw-FRs" firstAttribute="leading" secondItem="eH3-Gx-UZP" secondAttribute="leading" constant="20" id="XtR-xR-3oP"/>
                                             <constraint firstItem="xiZ-br-8aB" firstAttribute="leading" secondItem="eH3-Gx-UZP" secondAttribute="leading" constant="20" id="bzC-vv-3rN"/>
-                                            <constraint firstItem="vTP-i3-jjx" firstAttribute="top" secondItem="eH3-Gx-UZP" secondAttribute="top" constant="120" id="ejN-Na-cn0"/>
+                                            <constraint firstItem="vTP-i3-jjx" firstAttribute="top" secondItem="eH3-Gx-UZP" secondAttribute="top" constant="50" id="ejN-Na-cn0"/>
                                             <constraint firstItem="tyk-0b-rrd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eH3-Gx-UZP" secondAttribute="leading" constant="20" symbolic="YES" id="fSI-4H-oUp"/>
                                             <constraint firstAttribute="trailing" secondItem="K9s-Fw-FRs" secondAttribute="trailing" constant="20" id="rrd-MN-Z6J"/>
                                             <constraint firstItem="K9s-Fw-FRs" firstAttribute="top" secondItem="xiZ-br-8aB" secondAttribute="bottom" constant="20" id="sOX-H1-GlD"/>
@@ -822,7 +821,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cdr-t4-WAu"/>
                                                 </constraints>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -834,7 +832,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="tmx-TJ-h69"/>
                                                 </constraints>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
@@ -846,7 +843,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                 <state key="normal" title="Log In">
-                                                    <color key="titleColor" red="0.67295237815924702" green="0.67295237815924702" blue="0.67295237815924702" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -861,14 +858,14 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                 <state key="normal" title="Forget Password ?">
-                                                    <color key="titleColor" red="0.66787623602726742" green="0.66787623602726742" blue="0.66787623602726742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.66787623602726742" green="0.11520615526597167" blue="0.1016979531061149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="onForgetPasswordButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="Bxh-e7-p2G"/>
                                                 </connections>
                                             </button>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itU-zI-MxM">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itU-zI-MxM">
                                                 <rect key="frame" x="344" y="120" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="ukx-7S-iL5"/>
@@ -919,7 +916,7 @@
                                 <rect key="frame" x="0.0" y="116" width="207" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" red="0.28405907296287225" green="0.28405907296287225" blue="0.28405907296287225" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="onTopLoginButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="mEj-b7-tL5"/>
@@ -929,7 +926,7 @@
                                 <rect key="frame" x="207" y="116" width="207" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.25873784834358293" green="0.25873784834358293" blue="0.25873784834358293" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="onTopSignupButonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="KR1-As-pyg"/>
@@ -1108,12 +1105,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="adrian-208892-unsplash" width="1486" height="2229"/>
         <image name="people" width="30" height="30"/>
         <image name="picture" width="30" height="30"/>
         <image name="user-6" width="80" height="80"/>
         <image name="user_group_man_woman" width="30" height="30"/>
         <image name="worldwide_location" width="30" height="30"/>
-        <image name="wyman-h-14843-unsplash" width="503.33334350585938" height="815"/>
     </resources>
 </document>

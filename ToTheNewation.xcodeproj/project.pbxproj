@@ -19,6 +19,7 @@
 		386DBCFB2269933D00C2DA10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 386DBCF92269933D00C2DA10 /* Main.storyboard */; };
 		386DBCFD2269933F00C2DA10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBCFC2269933F00C2DA10 /* Assets.xcassets */; };
 		386DBD002269933F00C2DA10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 386DBCFE2269933F00C2DA10 /* LaunchScreen.storyboard */; };
+		387B7C1E22A8F60A003B3E5F /* Toastable Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B7C1D22A8F60A003B3E5F /* Toastable Label.swift */; };
 		38BDF5112270DA3C00495130 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */; };
 		38BDF5122270DA3C00495130 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BDF5102270DA3C00495130 /* CollectionViewCell.xib */; };
 		38D22F1322A04CF600621CB9 /* GalleryImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D22F1222A04CF600621CB9 /* GalleryImageStruct.swift */; };
@@ -26,7 +27,7 @@
 		38EA0A06226D8851002E49CD /* EmployeeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A04226D8851002E49CD /* EmployeeListCell.swift */; };
 		38EA0A07226D8851002E49CD /* EmployeeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38EA0A05226D8851002E49CD /* EmployeeListCell.xib */; };
 		38EA0A0A226D8F23002E49CD /* Elementroundable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A09226D8F23002E49CD /* Elementroundable.swift */; };
-		38EA0A0C226DA2D0002E49CD /* Pushable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A0B226DA2D0002E49CD /* Pushable.swift */; };
+		38EA0A0C226DA2D0002E49CD /* Toastable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A0B226DA2D0002E49CD /* Toastable.swift */; };
 		38EA0A0E226DB4A2002E49CD /* EmployeeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A0D226DB4A2002E49CD /* EmployeeDetails.swift */; };
 		38EA0A11226DC8D2002E49CD /* ExtentionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A10226DC8D2002E49CD /* ExtentionFile.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		386DBCFC2269933F00C2DA10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		386DBCFF2269933F00C2DA10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		386DBD012269933F00C2DA10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		387B7C1D22A8F60A003B3E5F /* Toastable Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toastable Label.swift"; sourceTree = "<group>"; };
 		38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		38BDF5102270DA3C00495130 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		38D22F1222A04CF600621CB9 /* GalleryImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageStruct.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		38EA0A04226D8851002E49CD /* EmployeeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListCell.swift; sourceTree = "<group>"; };
 		38EA0A05226D8851002E49CD /* EmployeeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeListCell.xib; sourceTree = "<group>"; };
 		38EA0A09226D8F23002E49CD /* Elementroundable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elementroundable.swift; sourceTree = "<group>"; };
-		38EA0A0B226DA2D0002E49CD /* Pushable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pushable.swift; sourceTree = "<group>"; };
+		38EA0A0B226DA2D0002E49CD /* Toastable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toastable.swift; sourceTree = "<group>"; };
 		38EA0A0D226DB4A2002E49CD /* EmployeeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetails.swift; sourceTree = "<group>"; };
 		38EA0A10226DC8D2002E49CD /* ExtentionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				38EA0A09226D8F23002E49CD /* Elementroundable.swift */,
-				38EA0A0B226DA2D0002E49CD /* Pushable.swift */,
+				38EA0A0B226DA2D0002E49CD /* Toastable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				38EA0A10226DC8D2002E49CD /* ExtentionFile.swift */,
+				387B7C1D22A8F60A003B3E5F /* Toastable Label.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -259,11 +262,12 @@
 				38EA0A11226DC8D2002E49CD /* ExtentionFile.swift in Sources */,
 				384D6ADE22A506720002543C /* RootTabBarController.swift in Sources */,
 				38EA0A06226D8851002E49CD /* EmployeeListCell.swift in Sources */,
+				387B7C1E22A8F60A003B3E5F /* Toastable Label.swift in Sources */,
 				38EA0A0A226D8F23002E49CD /* Elementroundable.swift in Sources */,
 				381FCB282269DD9F002B5E96 /* GalleryViewController.swift in Sources */,
 				3836386D22A6E1D800FDCA90 /* TransparentNavBar.swift in Sources */,
 				381FCB262269DD7D002B5E96 /* MapViewController.swift in Sources */,
-				38EA0A0C226DA2D0002E49CD /* Pushable.swift in Sources */,
+				38EA0A0C226DA2D0002E49CD /* Toastable.swift in Sources */,
 				38D22F1322A04CF600621CB9 /* GalleryImageStruct.swift in Sources */,
 				381FCB2A2269DDD4002B5E96 /* LoginSignupViewController.swift in Sources */,
 				386DBCF62269933D00C2DA10 /* AppDelegate.swift in Sources */,

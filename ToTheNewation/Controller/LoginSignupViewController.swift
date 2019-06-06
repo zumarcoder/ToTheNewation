@@ -31,7 +31,6 @@ class LoginSignupViewController: UIViewController {
     @IBOutlet weak var userIDlabelLogedInView: UILabel!
     @IBOutlet weak var subscribtionLogedInLabel: UILabel!
     @IBOutlet weak var logoutButtonLogedInView: UIButton!
-    
     @IBOutlet weak var activityIndicatorLoginView: UIActivityIndicatorView!
     
     
@@ -64,6 +63,14 @@ class LoginSignupViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Profile"
+        if(UserDefaults.standard.bool(forKey: "loggedin"))
+        {
+            showProfileView()
+        }
+        else
+        {
+            hideProfileView()
+        }
     }
     
     
@@ -152,24 +159,29 @@ class LoginSignupViewController: UIViewController {
                             guard let firstName = userData["firstName"] as? String else {
                                 return
                             }
-                            self.loginparams.firstName = firstName
-                            print(firstName)
+                            //self.loginparams.firstName = firstName
+                            //print(firstName)
                             guard let lastName = userData["lastName"] as? String else {
                             return
                             }
-                            self.loginparams.lastName = lastName
+                            //self.loginparams.lastName = lastName
                             
                             guard let uID = userData["uid"] as? String else {
                                 return
                             }
-                            self.loginparams.iID = uID
+                            //self.loginparams.iID = uID
                             
                             guard let subscriptionStatus = userData["subscriptionStatus"] as? String else {
                                 return
                             }
-                            self.loginparams.Subscribtion = subscriptionStatus
+                            //self.loginparams.Subscribtion = subscriptionStatus
+                            UserDefaults.standard.set(true, forKey: "loggedin")
+                            UserDefaults.standard.set(firstName, forKey: "fn")
+                            UserDefaults.standard.set(lastName, forKey: "ln")
+                            UserDefaults.standard.set(uID, forKey: "uid")
+                            UserDefaults.standard.set(subscriptionStatus, forKey: "sub")
                             self.showProfileView()
-                        }
+                                                    }
                     }
                 }
                 catch
@@ -189,16 +201,24 @@ class LoginSignupViewController: UIViewController {
             self.rootViewOfLoginAndSignup.isHidden = true
             self.loginButton.isHidden = true
             self.signUpButton.isHidden = true
-            self.fNamelNameLabelLogedInView.text = "\(self.loginparams.firstName!)  \(self.loginparams.lastName!)"
-            self.userIDlabelLogedInView.text = self.loginparams.iID!
-            self.subscribtionLogedInLabel.text = self.loginparams.Subscribtion
+            self.fNamelNameLabelLogedInView.text = "\(UserDefaults.standard.string(forKey: "fn")!)  \(UserDefaults.standard.string(forKey: "ln")!)"
+            self.userIDlabelLogedInView.text = UserDefaults.standard.string(forKey: "uid")
+            self.subscribtionLogedInLabel.text = UserDefaults.standard.string(forKey: "sub")
             
         }
-       
     }
     
+    
+    func hideProfileView()
+    {
+        loggedinUIView.isHidden = true
+        rootViewOfLoginAndSignup.isHidden = false
+        loginButton.isHidden = false
+        signUpButton.isHidden = false
+    }
+
+    
     @IBAction func onSignupInsideButtonTap(_ sender: Any) {
-        UserDefaults.standard.set(true, forKey: "loggedin")
         let firstname = firstNameEditTextSignup.text!
         let lastname = lastnameEditTextSignup.text!
         let email = mailEditTextSignup.text!
@@ -320,6 +340,12 @@ class LoginSignupViewController: UIViewController {
     
     
     @IBAction func mailEditTextEditingDidEnd(_ sender: Any) {
+        if(self.emailEditTextLogin.text == "")
+        {
+            self.emailValidatedLabel.text = ""
+        }
+        else
+        {
         let mail = emailEditTextLogin.text
         let parameters = ["mail" : mail]
         guard let url = URL(string: "https://qa.curiousworld.com/api/v2/Validate/Email?_format=json")
@@ -364,22 +390,23 @@ class LoginSignupViewController: UIViewController {
             }.resume()
 //        print(emailValidationCode)
 //        print(emailMessage)
-        
+        }
     }
     
     
     func emailValidation() {
         if(emailValidationCode == 1)
         {            DispatchQueue.main.async {
-            self.emailValidatedLabel.isHidden = false
+            self.emailValidatedLabel.text = "✅"
             }
         }
         else {
                 DispatchQueue.main.async {
-                self.emailValidatedLabel.isHidden = true
-                let alert1 = UIAlertController(title: "Email", message: "We could not find any account with this email.", preferredStyle:.alert)
-                alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alert1, animated: true, completion: nil)
+                        self.emailValidatedLabel.text = "❌"
+            
+//                let alert1 = UIAlertController(title: "Email", message: "We could not find any account with this email.", preferredStyle:.alert)
+//                alert1.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//                self.present(alert1, animated: true, completion: nil)
             }
         }
     }
@@ -421,13 +448,12 @@ class LoginSignupViewController: UIViewController {
 
     @IBAction func onLogOutButtonTap(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "loggedin")
-        loggedinUIView.isHidden = true
-        rootViewOfLoginAndSignup.isHidden = false
-        loginButton.isHidden = false
-        signUpButton.isHidden = false
+        UserDefaults.standard.set("nil", forKey: "fn")
+        UserDefaults.standard.set("nil", forKey: "ln")
+        UserDefaults.standard.set("nil", forKey: "uid")
+        UserDefaults.standard.set("nil", forKey: "sub")
+            self.hideProfileView()
     }
-    
-
 
 }
 
