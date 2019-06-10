@@ -30,6 +30,7 @@
 		38EA0A0C226DA2D0002E49CD /* Toastable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A0B226DA2D0002E49CD /* Toastable.swift */; };
 		38EA0A0E226DB4A2002E49CD /* EmployeeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A0D226DB4A2002E49CD /* EmployeeDetails.swift */; };
 		38EA0A11226DC8D2002E49CD /* ExtentionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA0A10226DC8D2002E49CD /* ExtentionFile.swift */; };
+		38FD86EB22AE37330096BD59 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38FD86E922AE37330096BD59 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		38EA0A0B226DA2D0002E49CD /* Toastable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toastable.swift; sourceTree = "<group>"; };
 		38EA0A0D226DB4A2002E49CD /* EmployeeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetails.swift; sourceTree = "<group>"; };
 		38EA0A10226DC8D2002E49CD /* ExtentionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionFile.swift; sourceTree = "<group>"; };
+		38FD86EA22AE37330096BD59 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				381FCB2C2269E927002B5E96 /* Controller */,
 				381FCB2D2269E977002B5E96 /* StoryBoard */,
 				386DBCFC2269933F00C2DA10 /* Assets.xcassets */,
+				38FD86E922AE37330096BD59 /* Model.xcdatamodeld */,
 				386DBD012269933F00C2DA10 /* Info.plist */,
 			);
 			path = ToTheNewation;
@@ -272,6 +275,7 @@
 				381FCB2A2269DDD4002B5E96 /* LoginSignupViewController.swift in Sources */,
 				386DBCF62269933D00C2DA10 /* AppDelegate.swift in Sources */,
 				38BDF5112270DA3C00495130 /* CollectionViewCell.swift in Sources */,
+				38FD86EB22AE37330096BD59 /* Model.xcdatamodeld in Sources */,
 				38118B802279782700E8974D /* EmployeeListStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +478,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		38FD86E922AE37330096BD59 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				38FD86EA22AE37330096BD59 /* Model.xcdatamodel */,
+			);
+			currentVersion = 38FD86EA22AE37330096BD59 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 386DBCEA2269933D00C2DA10 /* Project object */;
 }
