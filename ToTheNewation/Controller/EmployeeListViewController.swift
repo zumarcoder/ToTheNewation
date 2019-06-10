@@ -19,7 +19,12 @@ class EmployeeListViewController: UIViewController {
     var arraydata = [EmployeeStruct]()
     
     override func viewDidLoad() {
-        super.navigationItem.title = "Employee List"
+        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+        self.tabBarController?.tabBar.layer.masksToBounds = false
+        self.tabBarController?.tabBar.layer.shadowColor = UIColor.black.cgColor
+        self.tabBarController?.tabBar.layer.shadowOpacity = 0.6
+        self.tabBarController?.tabBar.layer.shadowOffset = CGSize(width: 0, height: 4)
+        self.tabBarController?.tabBar.layer.shadowRadius = 8
         self.tableView.isHidden = true
         activityIndicator.roundTheView(corner: 4)
         super.viewDidLoad()
@@ -80,7 +85,7 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -91,5 +96,15 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         delegate.self = controller
         delegate.getEmpId(id)
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    
+    func depthEffect (element : UIView , shadowColor : UIColor , shadowOpacity : Float  , shadowOffSet : CGSize , shadowRadius : Float)
+    {
+        element.layer.masksToBounds = false
+        element.layer.shadowColor = UIColor.lightGray.cgColor
+        element.layer.shadowOpacity = 0.6
+        element.layer.shadowOffset = CGSize(width: 0, height: 1.6)
+        element.layer.shadowRadius = 4
     }
 }

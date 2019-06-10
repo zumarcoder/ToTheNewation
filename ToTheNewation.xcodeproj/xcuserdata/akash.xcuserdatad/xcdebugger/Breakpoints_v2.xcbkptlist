@@ -31,11 +31,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.032321"
+            timestampString = "581852270.512424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "viewTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -47,11 +47,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.032465"
+            timestampString = "581852270.51258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "viewTapped(sender:)"
             landmarkType = "7">
             <Locations>
@@ -95,23 +95,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.032549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.0326329"
+            timestampString = "581852270.512676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -123,15 +107,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.0327131"
+            timestampString = "581852270.512766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -143,13 +127,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
-            timestampString = "581373735.032791"
+            timestampString = "581852270.512867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "viewTapped(sender:)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToTheNewation/Controller/EmployeeDetails.swift"
+            timestampString = "581852270.5129499"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "EmployeeDetails"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

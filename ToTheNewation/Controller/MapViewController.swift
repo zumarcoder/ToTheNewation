@@ -17,7 +17,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         if CLLocationManager.authorizationStatus() == .notDetermined
         {
             locationManager.requestAlwaysAuthorization()

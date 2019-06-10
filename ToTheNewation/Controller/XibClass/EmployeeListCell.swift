@@ -16,6 +16,7 @@ class EmployeeListCell: UITableViewCell {
     
     override func awakeFromNib(){
         super.awakeFromNib()
+        depthEffect(element: baseContentView, shadowColor: UIColor.black, shadowOpacity: 2, shadowOffSet: CGSize(width: 0, height: 2), shadowRadius: 4)
         baseContentView.roundTheView(corner: 6)
         profilePictureView.roundTheView(corner : (profilePictureView.bounds.height/2))
         nameLabel.roundTheView(corner: 5)

@@ -28,3 +28,15 @@ extension UILabel : Toastable
         })
     }
 }
+
+//extension UIView
+//{
+    func depthEffect (element : UIView , shadowColor : UIColor , shadowOpacity : Int , shadowOffSet : CGSize , shadowRadius : Int)
+    {
+        element.layer.masksToBounds = false
+        element.layer.shadowColor = UIColor.lightGray.cgColor
+        element.layer.shadowOpacity = 0.6
+        element.layer.shadowOffset = CGSize(width: 0, height: 1.6)
+        element.layer.shadowRadius = 4
+    }
+//}

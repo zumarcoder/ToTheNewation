@@ -17,7 +17,7 @@ protocol ElementRoundable {
 extension UIView : ElementRoundable {
     func roundTheView(corner: CGFloat) {
         self.layer.cornerRadius = corner
-        self.clipsToBounds = true
+        //self.clipsToBounds = true
     }
 }
 
