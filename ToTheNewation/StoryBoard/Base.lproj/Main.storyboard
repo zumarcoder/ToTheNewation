@@ -868,6 +868,20 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VuS-Ri-4pj">
+                                                <rect key="frame" x="20" y="260" width="160" height="50"/>
+                                                <color key="backgroundColor" red="0.87908470812182748" green="0.87908470812182748" blue="0.87908470812182748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="21M-2h-nSa"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                                <state key="normal" title="Forget Password ?">
+                                                    <color key="titleColor" red="0.66787623600000001" green="0.1152061553" blue="0.1016979531" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onForgetPasswordButtonTap:" destination="Swn-tb-JiH" eventType="touchUpInside" id="vbR-Rj-UJs"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -875,11 +889,14 @@
                                             <constraint firstItem="itU-zI-MxM" firstAttribute="top" secondItem="FTD-6q-jlm" secondAttribute="top" id="784-d2-2gX"/>
                                             <constraint firstItem="itU-zI-MxM" firstAttribute="leading" secondItem="FTD-6q-jlm" secondAttribute="trailing" constant="-50" id="7fp-iy-x8F"/>
                                             <constraint firstItem="FTD-6q-jlm" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="20" id="Bb8-W0-fdn"/>
+                                            <constraint firstItem="VuS-Ri-4pj" firstAttribute="top" secondItem="LJR-oC-uGz" secondAttribute="top" id="Oae-aC-1j2"/>
                                             <constraint firstItem="itU-zI-MxM" firstAttribute="bottom" secondItem="FTD-6q-jlm" secondAttribute="bottom" id="Qdf-zs-gcy"/>
+                                            <constraint firstItem="VuS-Ri-4pj" firstAttribute="height" secondItem="LJR-oC-uGz" secondAttribute="height" id="SoO-7W-kXQ"/>
                                             <constraint firstItem="yaB-Fm-YkY" firstAttribute="top" secondItem="FTD-6q-jlm" secondAttribute="bottom" constant="20" id="XWk-3A-wNd"/>
                                             <constraint firstItem="LJR-oC-uGz" firstAttribute="top" secondItem="yaB-Fm-YkY" secondAttribute="bottom" constant="20" id="aXM-fT-HaA"/>
                                             <constraint firstItem="itU-zI-MxM" firstAttribute="height" secondItem="FTD-6q-jlm" secondAttribute="height" id="epl-AS-ZuL"/>
                                             <constraint firstItem="yaB-Fm-YkY" firstAttribute="leading" secondItem="5we-Lz-RUe" secondAttribute="leading" constant="20" id="ik5-de-Tpb"/>
+                                            <constraint firstItem="VuS-Ri-4pj" firstAttribute="leading" secondItem="yaB-Fm-YkY" secondAttribute="leading" id="mYS-en-FNT"/>
                                             <constraint firstAttribute="trailing" secondItem="yaB-Fm-YkY" secondAttribute="trailing" constant="20" id="mtp-hi-gqf"/>
                                             <constraint firstItem="LJR-oC-uGz" firstAttribute="trailing" secondItem="yaB-Fm-YkY" secondAttribute="trailing" id="poB-7c-bGt"/>
                                             <constraint firstAttribute="trailing" secondItem="FTD-6q-jlm" secondAttribute="trailing" constant="20" id="xol-oP-vzb"/>
@@ -975,6 +992,7 @@
                         <outlet property="emailValidatedLabel" destination="itU-zI-MxM" id="G8D-qX-xdZ"/>
                         <outlet property="fNamelNameLabelLogedInView" destination="5p7-Tg-Clk" id="bEx-NA-dnM"/>
                         <outlet property="firstNameEditTextSignup" destination="vTP-i3-jjx" id="fIK-bR-iay"/>
+                        <outlet property="forgetPasswordButtonLogin" destination="VuS-Ri-4pj" id="brI-xn-2pf"/>
                         <outlet property="lastnameEditTextSignup" destination="xiZ-br-8aB" id="Zgt-lZ-Fw9"/>
                         <outlet property="loggedinUIView" destination="f4E-AC-wgK" id="v92-A0-goW"/>
                         <outlet property="loginButton" destination="9yl-88-W5B" id="ukx-8U-bDh"/>

@@ -16,7 +16,8 @@ class CollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentUIView.roundTheView(corner: 15)
-        contentUIView.bordertheUIView(borderWidth: 1.0, borderColor: UIColor.gray.cgColor)
+        //contentUIView.bordertheUIView(borderWidth: 1.0, borderColor: UIColor.gray.cgColor)
+        depthEffect(element: contentUIView, shadowColor: UIColor.black, shadowOpacity: 2, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
     }
 
 }

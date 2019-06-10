@@ -56,7 +56,7 @@ class LoginSignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: Int(0.6), shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+        depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: loginInsideButtonLogin, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: forgetPasswordButtonLogin, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: loginButton, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
@@ -69,6 +69,7 @@ class LoginSignupViewController: UIViewController {
         depthEffect(element: mailEditTextSignup, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: passwordEditTextSignup, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: signupinsideButton, shadowColor: UIColor.gray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+        depthEffect(element: profilePictureLogedinView, shadowColor: UIColor.gray, shadowOpacity: 10, shadowOffSet: CGSize(width: 0, height: 5), shadowRadius: 10)
         
         emailEditTextLogin.setLeftPaddingPoints(10)
         emailEditTextLogin.setRightPaddingPoints(50)

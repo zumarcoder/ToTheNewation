@@ -62,12 +62,12 @@
                   symbolName = "ToTheNewation.EmployeeDetails.viewTapped(sender: __C.UITapGestureRecognizer) -&gt; ()"
                   moduleName = "ToTheNewation"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/akash/Desktop/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
-                  timestampString = "581507742.941255"
+                  urlString = "file:///Users/akash/Documents/DummyProject/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
+                  timestampString = "581854806.360877"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "157"
-                  endingLineNumber = "157"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
                   offsetFromSymbolStart = "228">
                </Location>
                <Location
@@ -77,12 +77,12 @@
                   symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in ToTheNewation.EmployeeDetails.viewTapped(sender: __C.UITapGestureRecognizer) -&gt; ()"
                   moduleName = "ToTheNewation"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/akash/Desktop/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
-                  timestampString = "581507742.944369"
+                  urlString = "file:///Users/akash/Documents/DummyProject/ToTheNewation/ToTheNewation/Controller/EmployeeDetails.swift"
+                  timestampString = "581854806.363945"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
                   offsetFromSymbolStart = "44">
                </Location>
             </Locations>
@@ -182,6 +182,22 @@
             endingLineNumber = "16"
             landmarkName = "unknown"
             landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToTheNewation/Controller/LoginSignupViewController.swift"
+            timestampString = "581855070.552273"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

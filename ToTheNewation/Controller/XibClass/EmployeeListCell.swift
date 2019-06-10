@@ -20,6 +20,7 @@ class EmployeeListCell: UITableViewCell {
         baseContentView.roundTheView(corner: 6)
         profilePictureView.roundTheView(corner : (profilePictureView.bounds.height/2))
         nameLabel.roundTheView(corner: 5)
+        
         }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
