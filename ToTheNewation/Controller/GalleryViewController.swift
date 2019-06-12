@@ -16,7 +16,7 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
-        getData()
+        //getData()
         let nib = UINib.init(nibName: "CollectionViewCell", bundle: nil)
         galleryCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
     }

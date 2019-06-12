@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1027,18 +1026,39 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2kz-I1-mGj">
                                 <rect key="frame" x="0.0" y="116" width="414" height="571"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hx2-vz-IHZ">
+                                <rect key="frame" x="322.66666666666669" y="593.33333333333337" width="50" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="013-location" translatesAutoresizingMaskIntoConstraints="NO" id="k5Q-81-VzJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="C1I-vD-2Dy"/>
+                                    <constraint firstItem="k5Q-81-VzJ" firstAttribute="leading" secondItem="Hx2-vz-IHZ" secondAttribute="leading" id="DlH-hV-nyQ"/>
+                                    <constraint firstAttribute="height" constant="50" id="F50-Sd-OW9"/>
+                                    <constraint firstItem="k5Q-81-VzJ" firstAttribute="top" secondItem="Hx2-vz-IHZ" secondAttribute="top" id="bZU-7J-bps"/>
+                                    <constraint firstAttribute="trailing" secondItem="k5Q-81-VzJ" secondAttribute="trailing" id="nnj-3U-aVw"/>
+                                    <constraint firstAttribute="bottom" secondItem="k5Q-81-VzJ" secondAttribute="bottom" id="zOU-Dx-hre"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7hW-vT-c6l" firstAttribute="trailing" secondItem="2kz-I1-mGj" secondAttribute="trailing" id="6su-hL-YDf"/>
+                            <constraint firstItem="Hx2-vz-IHZ" firstAttribute="centerX" secondItem="CYz-Xj-H5o" secondAttribute="centerX" multiplier="1.68" id="GDm-HC-b3E"/>
                             <constraint firstItem="2kz-I1-mGj" firstAttribute="leading" secondItem="7hW-vT-c6l" secondAttribute="leading" id="PNI-7E-Rxx"/>
                             <constraint firstItem="2kz-I1-mGj" firstAttribute="top" secondItem="7hW-vT-c6l" secondAttribute="top" id="gY5-6v-LFW"/>
                             <constraint firstItem="7hW-vT-c6l" firstAttribute="bottom" secondItem="2kz-I1-mGj" secondAttribute="bottom" id="rec-TT-uN0"/>
+                            <constraint firstItem="Hx2-vz-IHZ" firstAttribute="centerY" secondItem="CYz-Xj-H5o" secondAttribute="centerY" multiplier="1.68" id="tNt-NA-xk4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7hW-vT-c6l"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ide-8W-LOD"/>
                     <connections>
+                        <outlet property="locationUpdateImage" destination="k5Q-81-VzJ" id="L60-y1-ywu"/>
+                        <outlet property="locationUpdateUIView" destination="Hx2-vz-IHZ" id="PAe-40-xyy"/>
                         <outlet property="mapView" destination="2kz-I1-mGj" id="BdX-pu-lHz"/>
                     </connections>
                 </viewController>
@@ -1132,6 +1152,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="013-location" width="512" height="512"/>
         <image name="people" width="30" height="30"/>
         <image name="picture" width="30" height="30"/>
         <image name="user-6" width="80" height="80"/>

@@ -14,6 +14,5 @@ class TransparentNavBar : UINavigationController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //self.navigationBar.layer.opacity = 60
     }
 }

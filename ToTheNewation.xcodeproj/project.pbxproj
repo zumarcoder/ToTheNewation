@@ -20,6 +20,7 @@
 		386DBCFD2269933F00C2DA10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 386DBCFC2269933F00C2DA10 /* Assets.xcassets */; };
 		386DBD002269933F00C2DA10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 386DBCFE2269933F00C2DA10 /* LaunchScreen.storyboard */; };
 		387B7C1E22A8F60A003B3E5F /* Toastable Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387B7C1D22A8F60A003B3E5F /* Toastable Label.swift */; };
+		389ACAA122B0FBB700CE24A8 /* SavingAnnotationToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389ACAA022B0FBB700CE24A8 /* SavingAnnotationToDB.swift */; };
 		38BDF5112270DA3C00495130 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */; };
 		38BDF5122270DA3C00495130 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BDF5102270DA3C00495130 /* CollectionViewCell.xib */; };
 		38D22F1322A04CF600621CB9 /* GalleryImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D22F1222A04CF600621CB9 /* GalleryImageStruct.swift */; };
@@ -49,6 +50,7 @@
 		386DBCFF2269933F00C2DA10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		386DBD012269933F00C2DA10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		387B7C1D22A8F60A003B3E5F /* Toastable Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toastable Label.swift"; sourceTree = "<group>"; };
+		389ACAA022B0FBB700CE24A8 /* SavingAnnotationToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAnnotationToDB.swift; sourceTree = "<group>"; };
 		38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		38BDF5102270DA3C00495130 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		38D22F1222A04CF600621CB9 /* GalleryImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageStruct.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				38EA0A09226D8F23002E49CD /* Elementroundable.swift */,
 				38EA0A0B226DA2D0002E49CD /* Toastable.swift */,
+				389ACAA022B0FBB700CE24A8 /* SavingAnnotationToDB.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38EA0A0E226DB4A2002E49CD /* EmployeeDetails.swift in Sources */,
+				389ACAA122B0FBB700CE24A8 /* SavingAnnotationToDB.swift in Sources */,
 				386DBCF82269933D00C2DA10 /* EmployeeListViewController.swift in Sources */,
 				384D6ADC22A4FC530002543C /* AgreementViewController.swift in Sources */,
 				38D22F1522A0568000621CB9 /* PopoutGalleryImage.swift in Sources */,
@@ -422,16 +426,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7LQ27H37RL;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = RX67CZ6XK5;
 				INFOPLIST_FILE = ToTheNewation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tothenew.ToTheNewation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kplus.multiscreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = KPlus_Development;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,16 +447,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7LQ27H37RL;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = RX67CZ6XK5;
 				INFOPLIST_FILE = ToTheNewation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tothenew.ToTheNewation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kplus.multiscreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = KPlus_Distribution;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
