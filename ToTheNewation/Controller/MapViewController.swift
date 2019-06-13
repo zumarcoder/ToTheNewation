@@ -55,17 +55,12 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             locationManager.stopUpdatingLocation()
             
         }
-        
-        
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         longPressRecogniser.minimumPressDuration = 0.5
         mapView.addGestureRecognizer(longPressRecogniser)
         mapView.mapType = MKMapType.standard
         mapView.showsUserLocation = true
-        
-        
-        
-//        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(keyLat.toFloat()),longitude: CLLocationDegrees(keyLon.toFloat()))
+//        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(keyLat.toFloat()),longitude:        CLLocationDegrees(keyLon.toFloat()))
 //        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
 //        let region = MKCoordinateRegion(center: location, span: span)
 //        mapView.setRegion(region, animated: true)
@@ -75,8 +70,8 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
 //        annotation.title = "BC Place Stadium"
 //        annotation.subtitle = "Vancouver Canada"
 //        mapView.addAnnotation(annotation)
-        
     }
+    
     @objc func viewTapped(sender: UITapGestureRecognizer) {
         mapView.setCenter(mapView.userLocation.coordinate, animated: true)
     }
@@ -87,7 +82,6 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
     {
-        
         if gestureReconizer.state == .began {
             let location = gestureReconizer.location(in: mapView)
             let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
@@ -98,17 +92,13 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
             mapView.addAnnotation(annotation)
         }
-        
-       
     }
     
     var selectedAnnotation: MKPointAnnotation?
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         let latValStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.latitude)!))
         let lonvalStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.longitude)!))
-        
         print("latitude: \(latValStr) & longitude: \(lonvalStr)")
     }
     
@@ -117,6 +107,7 @@ extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue
     }
+    
     func toFloat() -> Float {
         return (self as NSString).floatValue
     }

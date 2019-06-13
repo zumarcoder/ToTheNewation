@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "013-location.png",
+      "filename" : "gps-fixed-indicator.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "gps-fixed-indicator-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "gps-fixed-indicator-1.png",
       "scale" : "3x"
     }
   ],

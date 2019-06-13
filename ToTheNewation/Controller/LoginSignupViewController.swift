@@ -83,8 +83,6 @@ class LoginSignupViewController: UIViewController {
         mailEditTextSignup.setRightPaddingPoints(10)
         passwordEditTextSignup.setLeftPaddingPoints(10)
         passwordEditTextSignup.setRightPaddingPoints(10)
-
-
         loginInsideButtonLogin.roundTheView(corner: 10)
         forgetPasswordButtonLogin.roundTheView(corner: 10)
         signupinsideButton.roundTheView(corner: 10)
@@ -155,7 +153,6 @@ class LoginSignupViewController: UIViewController {
         self.activityIndicatorLoginView.isHidden = false
         let mail = emailEditTextLogin.text!
         let password = passwordEditTextLogin.text!
-        
         let parameters = [
             "mail" : mail ,
             "password" : password,
@@ -163,6 +160,7 @@ class LoginSignupViewController: UIViewController {
             "client_id" : "ec7c3bde-9f51-4113-9ecf-6ca6fd03b66b",
             "scope" : "ios",
             "grant_type" : "password"]
+        
         
         func getPostDataAttributes(params:[String:String]) -> Data
         {
@@ -178,8 +176,8 @@ class LoginSignupViewController: UIViewController {
             return data
         }
         
-        let parametersData = getPostDataAttributes(params: parameters)
         
+        let parametersData = getPostDataAttributes(params: parameters)
         guard let url = URL(string: "https://qa.curiousworld.com/api/v2/Login?_format=json")
             else {
             return
@@ -187,19 +185,12 @@ class LoginSignupViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
-        
-        
-        
-//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) else
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options:                 .prettyPrinted) else
 //        {
 //            return
 //        }
-        
-        
-        
         request.httpBody = parametersData
         let session = URLSession.shared
-        
         session.dataTask(with: request) {
             (data , response , error) in
             if let data = data
@@ -219,12 +210,10 @@ class LoginSignupViewController: UIViewController {
                             return
                             }
                             //self.loginparams.lastName = lastName
-                            
                             guard let uID = userData["uid"] as? String else {
                                 return
                             }
                             //self.loginparams.iID = uID
-                            
                             guard let subscriptionStatus = userData["subscriptionStatus"] as? String else {
                                 return
                             }
@@ -235,6 +224,7 @@ class LoginSignupViewController: UIViewController {
                             UserDefaults.standard.set(uID, forKey: "uid")
                             UserDefaults.standard.set(subscriptionStatus, forKey: "sub")
                         }
+                        
                         if let statusmsg = json["status"] as? [String : Any]
                         {
                             guard let codeResponse = statusmsg["code"] as? Int else
@@ -253,14 +243,15 @@ class LoginSignupViewController: UIViewController {
                         }
                     }
                 }
+                    
                 catch
                 {
                     print(error)
                 }
             }
         }.resume()
-        
     }
+    
     
     func loginApiHandler()
     {
@@ -273,13 +264,14 @@ class LoginSignupViewController: UIViewController {
         }
         else
         {
-            DispatchQueue.main.async {
+                DispatchQueue.main.async {
                 self.activityIndicatorLoginView.isHidden = true
                 self.toastMessageLabel.toastMessageLabel(message: self.loginValidationMessage)
             }
            
         }
     }
+    
     
     func showProfileView()
     {
@@ -293,7 +285,6 @@ class LoginSignupViewController: UIViewController {
             self.fNamelNameLabelLogedInView.text = "\(UserDefaults.standard.string(forKey: "fn")!)  \(UserDefaults.standard.string(forKey: "ln")!)"
             self.userIDlabelLogedInView.text = UserDefaults.standard.string(forKey: "uid")
             self.subscribtionLogedInLabel.text = UserDefaults.standard.string(forKey: "sub")
-            
         }
     }
     
@@ -316,11 +307,11 @@ class LoginSignupViewController: UIViewController {
         let email = mailEditTextSignup.text!
         let password = passwordEditTextSignup.text!
         let parameters = ["firstName" : firstname , "lastName" : lastname, "mail" : email , "password" : password ]
-        
         guard let url = URL(string: "https://qa.curiousworld.com/api/v2/SignUp")
             else {
             return
         }
+        
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -369,7 +360,7 @@ class LoginSignupViewController: UIViewController {
                 }
             }
         }.resume()
-}
+    }
     
     
     func resetPassword()
@@ -379,7 +370,7 @@ class LoginSignupViewController: UIViewController {
         guard let url = URL(string: "https://qa.curiousworld.com/api/v2/ForgetPassword?_format=json")
             else{
                 return
-        }
+            }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -454,7 +445,7 @@ class LoginSignupViewController: UIViewController {
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
 //            if let response = response {
-//         //       print(response)
+//                print(response)
 //            }
             if let data = data {
                 do {
@@ -489,17 +480,18 @@ class LoginSignupViewController: UIViewController {
     func emailValidation() {
         if(emailValidationCode == 1)
         {            DispatchQueue.main.async {
-            self.emailValidatedLabel.text = "✅"
+            self.emailValidatedLabel.text = "✓"
             }
         }
         else {
                 DispatchQueue.main.async {
-                        self.emailValidatedLabel.text = "❌"
+                        self.emailValidatedLabel.text = "✗"
                     self.toastMessageLabel.toastMessageLabel(message: self.emailMessage)
             }
         }
     }
 
+    
     func signUpApiResponseHandling()
     {
         if signupValidationCode == 1
@@ -526,6 +518,7 @@ class LoginSignupViewController: UIViewController {
         
     }
 
+    
     func forgetPaswordApiResponseHandling()
     {
                     DispatchQueue.main.async {
@@ -541,6 +534,7 @@ class LoginSignupViewController: UIViewController {
             }
         }
 
+    
     @IBAction func onLogOutButtonTap(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "loggedin")
         UserDefaults.standard.set("nil", forKey: "fn")
