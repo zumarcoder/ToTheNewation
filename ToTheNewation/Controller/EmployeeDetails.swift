@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate
+class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate
 {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var profilePictureBaseView : UIView!
@@ -35,6 +35,12 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        longPressRecogniser.minimumPressDuration = 0.5
+        mapView.addGestureRecognizer(longPressRecogniser)
+        mapView.mapType = MKMapType.standard
+        mapView.showsUserLocation = true
+        depthEffect(element: detailsView, shadowColor: UIColor.black, shadowOpacity: 1, shadowOffSet:  CGSize(width: 0, height: 1.6), shadowRadius: 4)
         depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         let tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped(sender:)))
         tap.delegate = self
@@ -53,6 +59,9 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate
         else if CLLocationManager.authorizationStatus() == .authorizedAlways
         {
             locationManager.startUpdatingLocation()
+            locationManager.desiredAccuracy = 1.0
+            locationManager.delegate = self
+            locationManager.stopUpdatingLocation()
         }
     
         detailsView.roundTheView(corner: 10)
@@ -113,6 +122,8 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate
     
     @IBAction func onMapButtonTap(_ sender: Any) {
         gallaryCollectionView.isHidden = true
+        locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
         mapButton.setTitleColor(.white , for: .normal)
         addAnnotationButton.setTitleColor(.white , for: .normal)
 
@@ -168,7 +179,30 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate
         self.present(actionStyleSheet, animated: true, completion: nil)
     }
     
+
+    @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
+    {
+        if gestureReconizer.state == .began {
+            let location = gestureReconizer.location(in: mapView)
+            let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
+            
+            // Add annotation:
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
+            mapView.addAnnotation(annotation)
+        }
+    }
     
+    
+    var selectedAnnotation: MKPointAnnotation?
+    
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let latValStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.latitude)!))
+        let lonvalStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.longitude)!))
+        print("latitude: \(latValStr) & longitude: \(lonvalStr)")
+    }
 }
 
 extension EmployeeDetails : UICollectionViewDataSource , UICollectionViewDelegate {
@@ -190,5 +224,18 @@ extension EmployeeDetails : UIImagePickerControllerDelegate , UINavigationContro
         profilePictureImage.image = image
         dismiss(animated: true, completion: nil)
         
+    }
+    
+}
+
+extension EmployeeDetails
+{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002))
+        self.mapView.setRegion(region, animated: true)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("unable to access your Current Location")
     }
 }

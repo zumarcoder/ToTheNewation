@@ -159,7 +159,9 @@ class LoginSignupViewController: UIViewController {
             "client_secret" : "abcde12345",
             "client_id" : "ec7c3bde-9f51-4113-9ecf-6ca6fd03b66b",
             "scope" : "ios",
-            "grant_type" : "password"]
+            "grant_type" : "password" ,
+            "deviceId" : "12345"
+        ]
         
         
         func getPostDataAttributes(params:[String:String]) -> Data
@@ -178,7 +180,7 @@ class LoginSignupViewController: UIViewController {
         
         
         let parametersData = getPostDataAttributes(params: parameters)
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v2/Login?_format=json")
+        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Login?_format=json")
             else {
             return
         }
@@ -307,7 +309,7 @@ class LoginSignupViewController: UIViewController {
         let email = mailEditTextSignup.text!
         let password = passwordEditTextSignup.text!
         let parameters = ["firstName" : firstname , "lastName" : lastname, "mail" : email , "password" : password ]
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v2/SignUp")
+        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/SignUp")
             else {
             return
         }
@@ -367,7 +369,7 @@ class LoginSignupViewController: UIViewController {
     {
         let passwordResetTextField = textField!.text!
         let parameters = ["mail" : passwordResetTextField ]
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v2/ForgetPassword?_format=json")
+        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/ForgetPassword?_format=json")
             else{
                 return
             }
@@ -430,7 +432,7 @@ class LoginSignupViewController: UIViewController {
         {
         let mail = emailEditTextLogin.text
         let parameters = ["mail" : mail]
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v2/Validate/Email?_format=json")
+        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Validate/Email?_format=json")
             else{
             return
         }

@@ -115,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Jmw-rr-DyE"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EpS-Tb-Rga"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5D-Cx-jw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -464,9 +464,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cGE-zb-LYS"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Mdj-hZ-SFs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="8HQ-N4-90k"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Mdj-hZ-SFs"/>
                     <connections>
                         <outlet property="addAnnotationButton" destination="LKG-Iv-u4q" id="Wjr-3K-APk"/>
                         <outlet property="ageLabel" destination="bUY-IP-cOs" id="53U-BI-U54"/>
