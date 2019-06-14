@@ -143,12 +143,22 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fdN-Ep-aZQ">
+                                <rect key="frame" x="0.0" y="60" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4ke-AQ-Wqf"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="29A-Zb-M8z"/>
+                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-56" id="9TW-al-wPF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="i3B-uO-lfW" secondAttribute="bottom" id="BGO-bl-3ea"/>
-                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JbM-EP-ku2"/>
+                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="fdN-Ep-aZQ" secondAttribute="bottom" id="Frv-Kf-Wz9"/>
+                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q1s-Cv-Rcc"/>
+                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aqw-7k-SCH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="i3B-uO-lfW" secondAttribute="trailing" id="fcb-F3-eJp"/>
                             <constraint firstItem="i3B-uO-lfW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="omK-Mp-moy"/>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGi-lo-mId"/>
@@ -158,12 +168,13 @@
                     <navigationItem key="navigationItem" id="MfW-OT-Ouh"/>
                     <connections>
                         <outlet property="activityIndicator" destination="GxN-O4-UpM" id="mjn-oq-f19"/>
+                        <outlet property="searchBar" destination="fdN-Ep-aZQ" id="p8Y-K1-7Jq"/>
                         <outlet property="tableView" destination="i3B-uO-lfW" id="07G-gd-Fcw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="-846"/>
+            <point key="canvasLocation" x="1944.8" y="-846.02698650674665"/>
         </scene>
         <!--Employee Details-->
         <scene sceneID="ifN-8Z-Btd">

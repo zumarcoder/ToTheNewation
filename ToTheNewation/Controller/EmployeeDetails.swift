@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate
+class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB
 {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var profilePictureBaseView : UIView!
@@ -191,9 +191,12 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
             annotation.coordinate = coordinate
             annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
             mapView.addAnnotation(annotation)
+            addData(name: "NewAnnotation", longitude: annotation.coordinate.longitude, latitude: annotation.coordinate.latitude)
+//                    let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//                    urls[urls.count-1] as NSURL
+//                    print(urls)
         }
     }
-    
     
     var selectedAnnotation: MKPointAnnotation?
     

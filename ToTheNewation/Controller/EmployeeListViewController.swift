@@ -16,7 +16,10 @@ protocol Gettable {
 class EmployeeListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar : UISearchBar!
     var arraydata = [EmployeeStruct]()
+    var isSearching = false
+    var filteredData = [EmployeeStruct]()
     
     override func viewDidLoad() {
         self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
@@ -30,6 +33,8 @@ class EmployeeListViewController: UIViewController {
         super.viewDidLoad()
         let nib = UINib.init(nibName: "EmployeeListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
+        searchBar.delegate  = self
+        searchBar.returnKeyType = UIReturnKeyType.done
         getData()
     }
     
@@ -58,16 +63,16 @@ class EmployeeListViewController: UIViewController {
                 
             catch
             {
-
+                
                 print("Error in getData()")
             }
             }.resume()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      self.navigationController?.navigationBar.topItem?.title = "Employee List"
+        self.navigationController?.navigationBar.topItem?.title = "Employee List"
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.tableView.deselectSelectedRow(animated: true)
     }
@@ -75,12 +80,26 @@ class EmployeeListViewController: UIViewController {
 
 extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arraydata.count
+        if isSearching
+        {
+            return filteredData.count
+        }
+        else
+        {
+            return arraydata.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EmployeeListCell
-        cell.nameLabel.text = arraydata[indexPath.row].employee_name
+        if isSearching
+        {
+            cell.nameLabel.text = filteredData[indexPath.row].employee_name
+        }
+        else
+        {
+            cell.nameLabel.text = arraydata[indexPath.row].employee_name
+        }
         return cell
     }
     
@@ -107,4 +126,31 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         element.layer.shadowOffset = CGSize(width: 0, height: 1.6)
         element.layer.shadowRadius = 4
     }
+}
+
+// searchbar logic
+
+extension EmployeeListViewController : UISearchBarDelegate
+{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredData.removeAll()
+        if(searchBar.text!.isEmpty)
+        {
+            isSearching = false
+            tableView.reloadData()
+        }
+       else
+        {
+            isSearching = true
+            for item in arraydata
+            {
+                if(item.employee_name.hasPrefix(searchBar.text!))
+                {
+                    filteredData.append(item)
+                }
+            }
+            tableView.reloadData()
+        }
+    }
+    
 }

@@ -91,6 +91,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             annotation.coordinate = coordinate
             annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
             mapView.addAnnotation(annotation)
+            
         }
     }
     
