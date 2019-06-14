@@ -13,7 +13,7 @@ protocol Gettable {
 }
 
 
-class EmployeeListViewController: UIViewController {
+class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar : UISearchBar!
@@ -35,6 +35,9 @@ class EmployeeListViewController: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: "Cell")
         searchBar.delegate  = self
         searchBar.returnKeyType = UIReturnKeyType.done
+        let tap = UITapGestureRecognizer(target: self.tableView, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         getData()
     }
     
@@ -114,6 +117,7 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         var delegate: Gettable!
         delegate.self = controller
         delegate.getEmpId(id)
+        print(arraydata[indexPath.row].id)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -153,4 +157,6 @@ extension EmployeeListViewController : UISearchBarDelegate
         }
     }
     
-}
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }}

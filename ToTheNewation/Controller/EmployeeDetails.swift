@@ -191,7 +191,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
             annotation.coordinate = coordinate
             annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
             mapView.addAnnotation(annotation)
-            addData(name: "NewAnnotation", longitude: annotation.coordinate.longitude, latitude: annotation.coordinate.latitude)
+            addData(name: self.nameLabel.text! , longitude: annotation.coordinate.longitude, latitude: annotation.coordinate.latitude)
 //                    let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 //                    urls[urls.count-1] as NSURL
 //                    print(urls)

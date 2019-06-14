@@ -92,11 +92,11 @@ class LoginSignupViewController: UIViewController {
         lastnameEditTextSignup.roundTheView(corner: 10)
         mailEditTextSignup.roundTheView(corner: 10)
         passwordEditTextSignup.roundTheView(corner: 10)
+        profilePictureLogedinView.roundTheView(corner: profilePictureLogedinView.frame.height/2)
+        logoutButtonLogedInView.roundTheView(corner: 5)
         
         let tap = UITapGestureRecognizer(target: self.rootViewOfLoginAndSignup, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
-        profilePictureLogedinView.roundTheView(corner: profilePictureLogedinView.frame.height/2)
-        logoutButtonLogedInView.roundTheView(corner: 5)
         self.view.addGestureRecognizer(tap)
     }
     
@@ -150,108 +150,114 @@ class LoginSignupViewController: UIViewController {
     
     
     @IBAction func onLoginButtonTap(_ sender: Any) {
-        self.activityIndicatorLoginView.isHidden = false
-        let mail = emailEditTextLogin.text!
-        let password = passwordEditTextLogin.text!
-        let parameters = [
-            "mail" : mail ,
-            "password" : password,
-            "client_secret" : "abcde12345",
-            "client_id" : "ec7c3bde-9f51-4113-9ecf-6ca6fd03b66b",
-            "scope" : "ios",
-            "grant_type" : "password" ,
-            "deviceId" : "12345"
-        ]
-        
-        
-        func getPostDataAttributes(params:[String:String]) -> Data
+        if emailEditTextLogin.text!.isEmpty || passwordEditTextLogin.text!.isEmpty
         {
-            var data = Data()
-            for(key, value) in params
-            {
-                let string = "--CuriousWorld\r\n".data(using: .utf8)
-                data.append(string!)
-                data.append(String.init(format: "Content-Disposition: form-data; name=%@\r\n\r\n", key).data(using: .utf8)!)
-                data.append(String.init(format: "%@\r\n", value).data(using: .utf8)!)
-                data.append(String.init(format: "--CuriousWorld--\r\n").data(using: .utf8)!)
-            }
-            return data
+            toastMessageLabel.toastMessageLabel(message: "Fill all the Field")
         }
-        
-        
-        let parametersData = getPostDataAttributes(params: parameters)
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Login?_format=json")
-            else {
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
-//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options:                 .prettyPrinted) else
-//        {
-//            return
-//        }
-        request.httpBody = parametersData
-        let session = URLSession.shared
-        session.dataTask(with: request) {
-            (data , response , error) in
-            if let data = data
+        else
+        {
+            self.activityIndicatorLoginView.isHidden = false
+            let mail = emailEditTextLogin.text!
+            let password = passwordEditTextLogin.text!
+            let parameters = [
+                "mail" : mail ,
+                "password" : password,
+                "client_secret" : "abcde12345",
+                "client_id" : "ec7c3bde-9f51-4113-9ecf-6ca6fd03b66b",
+                "scope" : "ios",
+                "grant_type" : "password" ,
+                "deviceId" : "12345"
+            ]
+            func getPostDataAttributes(params:[String:String]) -> Data
             {
-                do
+                var data = Data()
+                for(key, value) in params
                 {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                    let string = "--CuriousWorld\r\n".data(using: .utf8)
+                    data.append(string!)
+                    data.append(String.init(format: "Content-Disposition: form-data; name=%@\r\n\r\n", key).data(using: .utf8)!)
+                    data.append(String.init(format: "%@\r\n", value).data(using: .utf8)!)
+                    data.append(String.init(format: "--CuriousWorld--\r\n").data(using: .utf8)!)
+                }
+                return data
+            }
+            
+            
+            let parametersData = getPostDataAttributes(params: parameters)
+            guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Login?_format=json")
+                else {
+                    return
+            }
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
+            //        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options:                 .prettyPrinted) else
+            //        {
+            //            return
+            //        }
+            request.httpBody = parametersData
+            let session = URLSession.shared
+            session.dataTask(with: request) {
+                (data , response , error) in
+                if let data = data
+                {
+                    do
                     {
-                        if let userData = json["data"] as? [String : Any]
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
                         {
-                            guard let firstName = userData["firstName"] as? String else {
-                                return
-                            }
-                            //self.loginparams.firstName = firstName
-                            //print(firstName)
-                            guard let lastName = userData["lastName"] as? String else {
-                            return
-                            }
-                            //self.loginparams.lastName = lastName
-                            guard let uID = userData["uid"] as? String else {
-                                return
-                            }
-                            //self.loginparams.iID = uID
-                            guard let subscriptionStatus = userData["subscriptionStatus"] as? String else {
-                                return
-                            }
-                            //self.loginparams.Subscribtion = subscriptionStatus
-                            UserDefaults.standard.set(true, forKey: "loggedin")
-                            UserDefaults.standard.set(firstName, forKey: "fn")
-                            UserDefaults.standard.set(lastName, forKey: "ln")
-                            UserDefaults.standard.set(uID, forKey: "uid")
-                            UserDefaults.standard.set(subscriptionStatus, forKey: "sub")
-                        }
-                        
-                        if let statusmsg = json["status"] as? [String : Any]
-                        {
-                            guard let codeResponse = statusmsg["code"] as? Int else
+                            if let userData = json["data"] as? [String : Any]
                             {
-                                return
+                                guard let firstName = userData["firstName"] as? String else {
+                                    return
+                                }
+                                //self.loginparams.firstName = firstName
+                                //print(firstName)
+                                guard let lastName = userData["lastName"] as? String else {
+                                    return
+                                }
+                                //self.loginparams.lastName = lastName
+                                guard let uID = userData["uid"] as? String else {
+                                    return
+                                }
+                                //self.loginparams.iID = uID
+                                guard let subscriptionStatus = userData["subscriptionStatus"] as? String else {
+                                    return
+                                }
+                                //self.loginparams.Subscribtion = subscriptionStatus
+                                UserDefaults.standard.set(true, forKey: "loggedin")
+                                UserDefaults.standard.set(firstName, forKey: "fn")
+                                UserDefaults.standard.set(lastName, forKey: "ln")
+                                UserDefaults.standard.set(uID, forKey: "uid")
+                                UserDefaults.standard.set(subscriptionStatus, forKey: "sub")
                             }
-                            self.loginValidationCode = codeResponse
                             
-                            guard let messageResponse = statusmsg["message"] as? String
-                            else
+                            if let statusmsg = json["status"] as? [String : Any]
                             {
-                                return
+                                guard let codeResponse = statusmsg["code"] as? Int else
+                                {
+                                    return
+                                }
+                                self.loginValidationCode = codeResponse
+                                
+                                guard let messageResponse = statusmsg["message"] as? String
+                                    else
+                                {
+                                    return
+                                }
+                                self.loginValidationMessage = messageResponse
+                                self.loginApiHandler()
                             }
-                            self.loginValidationMessage = messageResponse
-                            self.loginApiHandler()
                         }
                     }
+                        
+                    catch
+                    {
+                        print(error)
+                    }
                 }
-                    
-                catch
-                {
-                    print(error)
-                }
-            }
-        }.resume()
+                }.resume()
+        }
+        
     }
     
     
@@ -302,66 +308,74 @@ class LoginSignupViewController: UIViewController {
 
     
     @IBAction func onSignupInsideButtonTap(_ sender: Any) {
-        self.activityIndicatorLoginView.isHidden = false
-        self.signupinsideButton.isEnabled = false
-        let firstname = firstNameEditTextSignup.text!
-        let lastname = lastnameEditTextSignup.text!
-        let email = mailEditTextSignup.text!
-        let password = passwordEditTextSignup.text!
-        let parameters = ["firstName" : firstname , "lastName" : lastname, "mail" : email , "password" : password ]
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/SignUp")
-            else {
-            return
+        if firstNameEditTextSignup.text!.isEmpty || lastnameEditTextSignup.text!.isEmpty || mailEditTextSignup.text!.isEmpty || passwordEditTextSignup.text!.isEmpty
+        {
+            toastMessageLabel.toastMessageLabel(message: "Fill all the Field")
         }
-        
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        guard let httpbody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-            else {
-            return
-        }
-        request.httpBody = httpbody
-        let session = URLSession.shared
-        session.dataTask(with: request) {
-            (data , response , error ) in
-            if let data = data
-            {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-                    {
-                        if let signupStatusCode = json["status"] as? [String : Any]
+        else
+        {
+            self.activityIndicatorLoginView.isHidden = false
+            self.signupinsideButton.isEnabled = false
+            let firstname = firstNameEditTextSignup.text!
+            let lastname = lastnameEditTextSignup.text!
+            let email = mailEditTextSignup.text!
+            let password = passwordEditTextSignup.text!
+            let parameters = ["firstName" : firstname , "lastName" : lastname, "mail" : email , "password" : password ]
+            guard let url = URL(string: "https://qa.curiousworld.com/api/v3/SignUp")
+                else {
+                    return
+            }
+            
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            guard let httpbody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                else {
+                    return
+            }
+            request.httpBody = httpbody
+            let session = URLSession.shared
+            session.dataTask(with: request) {
+                (data , response , error ) in
+                if let data = data
+                {
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
                         {
-                            guard let signupcoderesp = signupStatusCode["code"] as? Int
-                            else
+                            if let signupStatusCode = json["status"] as? [String : Any]
                             {
-                                return
+                                guard let signupcoderesp = signupStatusCode["code"] as? Int
+                                    else
+                                {
+                                    return
+                                }
+                                self.signupValidationCode = signupcoderesp
+                                //print(self.signupValidationCode!)
                             }
-                            self.signupValidationCode = signupcoderesp
-                            //print(self.signupValidationCode!)
-                        }
-                        
-                        if let signupStatusMessage = json["status"] as? [String : Any]
-                        {
-                            guard let signupStatusMessage = signupStatusMessage["message"] as? String
-                            else
+                            
+                            if let signupStatusMessage = json["status"] as? [String : Any]
                             {
-                                return
+                                guard let signupStatusMessage = signupStatusMessage["message"] as? String
+                                    else
+                                {
+                                    return
+                                }
+                                self.signupMessage = signupStatusMessage
+                                //print(self.signupMessage!)
+                                self.signUpApiResponseHandling()
                             }
-                            self.signupMessage = signupStatusMessage
-                            //print(self.signupMessage!)
-                            self.signUpApiResponseHandling()
                         }
                     }
+                    catch
+                    {
+                        print(error)
+                    }
                 }
-                catch
-                {
-                    print(error)
-                }
-            }
-        }.resume()
+                }.resume()
+        }
+        
     }
     
     

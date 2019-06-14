@@ -54,9 +54,6 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             locationManager.stopUpdatingLocation()
             
         }
-        let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        longPressRecogniser.minimumPressDuration = 0.5
-        mapView.addGestureRecognizer(longPressRecogniser)
         mapView.mapType = MKMapType.standard
         mapView.showsUserLocation = true
     }
@@ -71,7 +68,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
         for item in fetchedResultController.fetchedObjects!
         {
             let anotationn = MKPointAnnotation()
-            anotationn.title = "hello"
+            anotationn.title = item.name
             anotationn.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
             mapView.addAnnotation(anotationn)
         }
@@ -114,7 +111,7 @@ extension String {
 extension MapViewController
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002))
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         self.mapView.setRegion(region, animated: true)
     }
     
