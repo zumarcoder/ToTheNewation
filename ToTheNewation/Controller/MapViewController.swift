@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManagerDelegate , UIGestureRecognizerDelegate{
+class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManagerDelegate , UIGestureRecognizerDelegate , NSFetchedResultsControllerDelegate {
     
     fileprivate lazy var fetchedResultController: NSFetchedResultsController<Annotation> =
     {
@@ -29,8 +29,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     @IBOutlet weak var locationUpdateImage: UIImageView!
     
     let locationManager = CLLocationManager()
-//    var keyLat:String = "49.2768"
-//    var keyLon:String = "-123.1120"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,17 +59,8 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
         mapView.addGestureRecognizer(longPressRecogniser)
         mapView.mapType = MKMapType.standard
         mapView.showsUserLocation = true
-//        let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(keyLat.toFloat()),longitude:        CLLocationDegrees(keyLon.toFloat()))
-//        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//        let region = MKCoordinateRegion(center: location, span: span)
-//        mapView.setRegion(region, animated: true)
-//
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = location
-//        annotation.title = "BC Place Stadium"
-//        annotation.subtitle = "Vancouver Canada"
-//        mapView.addAnnotation(annotation)
     }
+    
     
     @objc func viewTapped(sender: UITapGestureRecognizer) {
         mapView.setCenter(mapView.userLocation.coordinate, animated: true)
@@ -78,6 +68,14 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     
     override func viewWillAppear(_ animated: Bool) {
        self.navigationController?.navigationBar.topItem?.title = "Map"
+        for item in fetchedResultController.fetchedObjects!
+        {
+            let anotationn = MKPointAnnotation()
+            anotationn.title = "hello"
+            anotationn.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+            mapView.addAnnotation(anotationn)
+        }
+        print(fetchedResultController.fetchedObjects!.count)
     }
     
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
@@ -91,7 +89,6 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             annotation.coordinate = coordinate
             annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
             mapView.addAnnotation(annotation)
-            
         }
     }
     
@@ -123,5 +120,11 @@ extension MapViewController
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("unable to access your Current Location")
+    }
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("Location updation in process")
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("Location updation is done")
     }
 }
