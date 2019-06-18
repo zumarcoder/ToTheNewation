@@ -15,9 +15,15 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentUIView.roundTheView(corner: 15)
-        //contentUIView.bordertheUIView(borderWidth: 1.0, borderColor: UIColor.gray.cgColor)
+        contentUIView.roundTheView(corner: 10)
+        imageView.roundTheView(corner: 10)
         depthEffect(element: contentUIView, shadowColor: UIColor.black, shadowOpacity: 2, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
     }
 
+    func settingData(image : UIImage , name : String)
+    {
+        self.imageView.image = image
+        self.titleLabel.text = name
+    }
+    
 }

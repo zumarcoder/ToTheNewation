@@ -113,8 +113,8 @@
 		384D6ADF22A51DBA0002543C /* XibClass */ = {
 			isa = PBXGroup;
 			children = (
-				38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */,
 				38EA0A04226D8851002E49CD /* EmployeeListCell.swift */,
+				38BDF50F2270DA3C00495130 /* CollectionViewCell.swift */,
 			);
 			path = XibClass;
 			sourceTree = "<group>";

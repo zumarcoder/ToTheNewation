@@ -27,10 +27,10 @@ extension SavingDataToDB
         }
         let context = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Annotation", in: context)
-        let recipeObject = NSManagedObject(entity: entity!, insertInto: context)
-        recipeObject.setValue(name , forKey: "name")
-        recipeObject.setValue(longitude , forKey: "longitude")
-        recipeObject.setValue(latitude , forKey: "latitude")
+        let annotations = NSManagedObject(entity: entity!, insertInto: context)
+        annotations.setValue(name , forKey: "name")
+        annotations.setValue(longitude , forKey: "longitude")
+        annotations.setValue(latitude , forKey: "latitude")
         do
         {
             try context.save()

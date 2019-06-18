@@ -11,17 +11,19 @@ import UIKit
 
 
 
-struct ItemDict : Decodable
-{
-    let kindof : String
- //   let items : [ImageDimension]
+struct GoogleApi: Decodable {
+    let items: [SubItems]
 }
 
-//struct ImageDimension : Decodable
-//{
-//    let title : String
-//    let link : String
-//    let thumbnailLink : String
-//    let thumbnailHeight : String
-//    let thumbnailWidth : String
-//}
+struct SubItems: Decodable{
+    let title: String
+    let image: SubImageInfo
+}
+
+struct SubImageInfo: Decodable {
+    let height: Int
+    let width: Int
+    let thumbnailLink: String
+    let thumbnailHeight: Int
+    let thumbnailWidth: Int
+}

@@ -17,6 +17,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar : UISearchBar!
+    
     var arraydata = [EmployeeStruct]()
     var isSearching = false
     var filteredData = [EmployeeStruct]()
@@ -73,6 +74,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = "Employee List"
     }
     
@@ -111,14 +113,25 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let id = arraydata[indexPath.row].id
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
-        var delegate: Gettable!
-        delegate.self = controller
-        delegate.getEmpId(id)
-        print(arraydata[indexPath.row].id)
-        self.navigationController?.pushViewController(controller, animated: true)
+        if isSearching{
+            let id = filteredData[indexPath.row].id
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
+            var delegate: Gettable!
+            delegate.self = controller
+            delegate.getEmpId(id)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        else
+        {
+            let id = arraydata[indexPath.row].id
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
+            var delegate: Gettable!
+            delegate.self = controller
+            delegate.getEmpId(id)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     

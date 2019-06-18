@@ -72,7 +72,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             anotationn.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
             mapView.addAnnotation(anotationn)
         }
-        print(fetchedResultController.fetchedObjects!.count)
+//        print(fetchedResultController.fetchedObjects!.count)
     }
     
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
@@ -90,12 +90,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     }
     
     var selectedAnnotation: MKPointAnnotation?
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let latValStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.latitude)!))
-        let lonvalStr : String = String(format: "%.02f",Float((view.annotation?.coordinate.longitude)!))
-        print("latitude: \(latValStr) & longitude: \(lonvalStr)")
-    }
+
     
 }
 extension String {

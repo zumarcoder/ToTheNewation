@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPA-0G-uJr">
                         <rect key="frame" x="5" y="5" width="100" height="100"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-pokemon-96" highlightedImage="icons8-pokemon-96" translatesAutoresizingMaskIntoConstraints="NO" id="vdX-cc-QJn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdX-cc-QJn">
                                 <rect key="frame" x="0.0" y="0.0" width="100" height="85"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="collectionCell" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="per-g5-VY9">
@@ -30,7 +29,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="7Gt-2o-DE4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="8"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -64,7 +63,4 @@
             <point key="canvasLocation" x="152" y="124.13793103448276"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="icons8-pokemon-96" width="48" height="48"/>
-    </resources>
 </document>

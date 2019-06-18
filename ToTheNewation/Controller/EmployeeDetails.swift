@@ -31,7 +31,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     var arraydata = [EmployeeStruct]()
     var empId = ""
     let locationManager = CLLocationManager()
-   
+    var anotationDeployingStatus = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +68,8 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         profilePictureImage.roundTheView(corner: profilePictureImage.bounds.height/2)
         galleryandmapViewCombinedView.roundTheView(corner: 15)
         detailsView.bordertheUIView(borderWidth: 2.5, borderColor: UIColor.gray.cgColor)
-        gallerybuttonUIView.roundtheCorners(corner: 15, maskableCorners: [.layerMinXMinYCorner])
-        locationbuttonUIView.roundtheCorners(corner: 15, maskableCorners: [.layerMaxXMinYCorner])
+        gallerybuttonUIView.roundtheCorners(corner: 12, maskableCorners: [.layerMinXMinYCorner])
+        locationbuttonUIView.roundtheCorners(corner: 12, maskableCorners: [.layerMaxXMinYCorner])
         gallaryCollectionView.roundtheCorners(corner: 15, maskableCorners: [.layerMinXMinYCorner , .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         mapView.roundtheCorners(corner: 15, maskableCorners: [.layerMaxXMinYCorner ,  .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         getData()
@@ -144,6 +144,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         gallerybuttonUIView.layer.backgroundColor = UIColor.white.cgColor
         galleryButton.setTitleColor(.black , for: .normal)
         imageAddButton.setTitleColor(.black, for: .normal)
+        anotationDeployingStatus = true
     }
 
     @IBAction func onimageAddTap(_ sender: Any) {
@@ -156,11 +157,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
         mapButton.setTitleColor(.black , for: .normal)
         addAnnotationButton.setTitleColor(.black , for: .normal)
-        
-
-    }
-    
-    @objc func viewTapped(sender: UITapGestureRecognizer) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         
@@ -172,26 +168,52 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         }))
         
         actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
-            
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
+            self.navigationController?.pushViewController(controller, animated: true)
         }))
         
         actionStyleSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil ))
         self.present(actionStyleSheet, animated: true, completion: nil)
+
+    }
+    
+    @objc func viewTapped(sender: UITapGestureRecognizer) {
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.delegate = self
+//
+//        let actionStyleSheet = UIAlertController(title: "Photo Source", message: "Choose a Source", preferredStyle: .actionSheet)
+//
+//        actionStyleSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action : UIAlertAction) in
+//            imagePickerController.sourceType = .photoLibrary
+//            self.present(imagePickerController, animated: true, completion: nil)
+//        }))
+//
+//        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
+//
+//        }))
+//
+//        actionStyleSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil ))
+//        self.present(actionStyleSheet, animated: true, completion: nil)
     }
     
 
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
     {
-        if gestureReconizer.state == .began {
-            let location = gestureReconizer.location(in: mapView)
-            let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
-            
-            // Add annotation:
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
-            mapView.addAnnotation(annotation)
-            addData(name: self.nameLabel.text! , longitude: annotation.coordinate.longitude, latitude: annotation.coordinate.latitude)
+        if anotationDeployingStatus
+        {
+            if gestureReconizer.state == .began {
+                let location = gestureReconizer.location(in: mapView)
+                let coordinate = mapView.convert(location,toCoordinateFrom: mapView)
+                
+                // Add annotation:
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
+                annotation.title = "latitude:" + String(format: "%.02f",annotation.coordinate.latitude) + "& longitude:" + String(format: "%.02f",annotation.coordinate.longitude)
+                mapView.addAnnotation(annotation)
+                addData(name: self.nameLabel.text! , longitude: annotation.coordinate.longitude, latitude: annotation.coordinate.latitude)
+        }
+       
 //                    let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 //                    urls[urls.count-1] as NSURL
 //                    print(urls)

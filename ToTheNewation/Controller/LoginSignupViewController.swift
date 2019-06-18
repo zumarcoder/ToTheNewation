@@ -52,7 +52,7 @@ class LoginSignupViewController: UIViewController {
         var Subscribtion : String!
     }
     var loginparams = LoginData(firstName: "", lastName: "", iID: "", Subscribtion: "")
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +168,7 @@ class LoginSignupViewController: UIViewController {
                 "grant_type" : "password" ,
                 "deviceId" : "12345"
             ]
+            
             func getPostDataAttributes(params:[String:String]) -> Data
             {
                 var data = Data()
@@ -181,8 +182,7 @@ class LoginSignupViewController: UIViewController {
                 }
                 return data
             }
-            
-            
+        
             let parametersData = getPostDataAttributes(params: parameters)
             guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Login?_format=json")
                 else {
@@ -191,10 +191,6 @@ class LoginSignupViewController: UIViewController {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=CuriousWorld", forHTTPHeaderField: "Content-Type")
-            //        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options:                 .prettyPrinted) else
-            //        {
-            //            return
-            //        }
             request.httpBody = parametersData
             let session = URLSession.shared
             session.dataTask(with: request) {
@@ -272,11 +268,11 @@ class LoginSignupViewController: UIViewController {
         }
         else
         {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.activityIndicatorLoginView.isHidden = true
                 self.toastMessageLabel.toastMessageLabel(message: self.loginValidationMessage)
             }
-           
+            
         }
     }
     
@@ -305,7 +301,7 @@ class LoginSignupViewController: UIViewController {
         loginButton.isHidden = false
         signUpButton.isHidden = false
     }
-
+    
     
     @IBAction func onSignupInsideButtonTap(_ sender: Any) {
         if firstNameEditTextSignup.text!.isEmpty || lastnameEditTextSignup.text!.isEmpty || mailEditTextSignup.text!.isEmpty || passwordEditTextSignup.text!.isEmpty
@@ -386,14 +382,14 @@ class LoginSignupViewController: UIViewController {
         guard let url = URL(string: "https://qa.curiousworld.com/api/v3/ForgetPassword?_format=json")
             else{
                 return
-            }
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             else {
-            return
+                return
         }
         request.httpBody = httpBody
         let session = URLSession.shared
@@ -409,7 +405,7 @@ class LoginSignupViewController: UIViewController {
                         if let forgetpassword = json["status"] as? [String : Any]
                         {
                             guard let forgetPasswordResponseCode = forgetpassword["code"] as? Int
-                            else
+                                else
                             {
                                 return
                             }
@@ -419,21 +415,21 @@ class LoginSignupViewController: UIViewController {
                         if let forgetPassword = json["status"] as? [String : Any]
                         {
                             guard let forgetPasswordResponseMessage = forgetPassword["message"] as? String
-                            else
+                                else
                             {
                                 return
                             }
                             self.forgetPasswordMessage = forgetPasswordResponseMessage
                         }
                         self.forgetPaswordApiResponseHandling()
-
+                        
                     }
                 }
                 catch{
                     print(error)
                 }
             }
-        }.resume()
+            }.resume()
     }
     
     
@@ -444,51 +440,49 @@ class LoginSignupViewController: UIViewController {
         }
         else
         {
-        let mail = emailEditTextLogin.text
-        let parameters = ["mail" : mail]
-        guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Validate/Email?_format=json")
-            else{
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-            else {
-            return
-        }
-        request.httpBody = httpBody
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-//            if let response = response {
-//                print(response)
-//            }
-            if let data = data {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                        if let statusCode = json["status"] as? [String:Any]{
-//                            print(statusCode)
-                            guard let codeResponse = statusCode["code"] as? Int else {return}
-//                            print("=========================== \(codeResponse)")
-                            self.emailValidationCode = codeResponse
-                            self.emailValidation()
-                        }
-                        if let statusMessage = json["status"] as? [String:Any]{
-//                            print(statusMessage)
-                            guard let codeResponseMessage = statusMessage["message"] as? String else {return}
-//                            print("=========================== \(codeResponseMessage)")
-                            self.emailMessage = codeResponseMessage
-                            print(self.emailMessage!)
-                        }
-                    }
-                } catch {
-                    print(error)
-                }
+            let mail = emailEditTextLogin.text
+            let parameters = ["mail" : mail]
+            guard let url = URL(string: "https://qa.curiousworld.com/api/v3/Validate/Email?_format=json")
+                else{
+                    return
             }
-            
-            }.resume()
-//        print(emailValidationCode)
-//        print(emailMessage)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                else {
+                    return
+            }
+            request.httpBody = httpBody
+            let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                //            if let response = response {
+                //                print(response)
+                //            }
+                if let data = data {
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
+                            if let statusCode = json["status"] as? [String:Any]{
+                                //                            print(statusCode)
+                                guard let codeResponse = statusCode["code"] as? Int else {return}
+                                //                            print("=========================== \(codeResponse)")
+                                self.emailValidationCode = codeResponse
+                                self.emailValidation()
+                            }
+                            if let statusMessage = json["status"] as? [String:Any]{
+                                //                            print(statusMessage)
+                                guard let codeResponseMessage = statusMessage["message"] as? String else {return}
+                                //                            print("=========================== \(codeResponseMessage)")
+                                self.emailMessage = codeResponseMessage
+                                print(self.emailMessage!)
+                            }
+                        }
+                    } catch {
+                        print(error)
+                    }
+                }
+                
+                }.resume()
         }
     }
     
@@ -500,30 +494,30 @@ class LoginSignupViewController: UIViewController {
             }
         }
         else {
-                DispatchQueue.main.async {
-                        self.emailValidatedLabel.text = "✗"
-                    self.toastMessageLabel.toastMessageLabel(message: self.emailMessage)
+            DispatchQueue.main.async {
+                self.emailValidatedLabel.text = "✗"
+                self.toastMessageLabel.toastMessageLabel(message: self.emailMessage)
             }
         }
     }
-
+    
     
     func signUpApiResponseHandling()
     {
         if signupValidationCode == 1
         {
-             DispatchQueue.main.async {
-            self.activityIndicatorLoginView.isHidden = true
-            self.toastMessageLabel.toastMessageLabel(message: self.signupMessage)
-            self.firstNameEditTextSignup.text = ""
-            self.lastnameEditTextSignup.text = ""
-            self.mailEditTextSignup.text = ""
-            self.passwordEditTextSignup.text = ""
+            DispatchQueue.main.async {
+                self.activityIndicatorLoginView.isHidden = true
+                self.toastMessageLabel.toastMessageLabel(message: self.signupMessage)
+                self.firstNameEditTextSignup.text = ""
+                self.lastnameEditTextSignup.text = ""
+                self.mailEditTextSignup.text = ""
+                self.passwordEditTextSignup.text = ""
             }
         }
         else
         {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.activityIndicatorLoginView.isHidden = true
                 self.toastMessageLabel.toastMessageLabel(message: self.signupMessage)
             }
@@ -533,23 +527,23 @@ class LoginSignupViewController: UIViewController {
         }
         
     }
-
+    
     
     func forgetPaswordApiResponseHandling()
     {
-                    DispatchQueue.main.async {
-                        
-                        if self.forgetPasswordCode == 0
-                        {
-                            self.toastMessageLabel.toastMessageLabel(message: "Ooops..! \(self.forgetPasswordMessage!)")
-                        }
-                        else
-                        {
-                            self.toastMessageLabel.toastMessageLabel(message: "Hello! \(self.textField!.text!) \(self.forgetPasswordMessage!)")
-                  }
+        DispatchQueue.main.async {
+            
+            if self.forgetPasswordCode == 0
+            {
+                self.toastMessageLabel.toastMessageLabel(message: "Ooops..! \(self.forgetPasswordMessage!)")
+            }
+            else
+            {
+                self.toastMessageLabel.toastMessageLabel(message: "Hello! \(self.textField!.text!) \(self.forgetPasswordMessage!)")
             }
         }
-
+    }
+    
     
     @IBAction func onLogOutButtonTap(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "loggedin")
@@ -557,8 +551,8 @@ class LoginSignupViewController: UIViewController {
         UserDefaults.standard.set("nil", forKey: "ln")
         UserDefaults.standard.set("nil", forKey: "uid")
         UserDefaults.standard.set("nil", forKey: "sub")
-            self.hideProfileView()
+        self.hideProfileView()
     }
-
+    
 }
 
