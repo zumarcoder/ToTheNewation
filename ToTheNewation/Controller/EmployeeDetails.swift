@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB
+class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB , NSFetchedResultsControllerDelegate
 {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var profilePictureBaseView : UIView!
@@ -32,7 +33,22 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     var empId = ""
     let locationManager = CLLocationManager()
     var anotationDeployingStatus = false
+    var gallaryImageUrl = [String]()
+    var galarytitle = [String]()
 
+    fileprivate lazy var fetchedResultController1: NSFetchedResultsController<UserImageData> =
+    {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate?.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest = UserImageData.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "urlImage", ascending: false)]
+        let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultController.delegate = self
+        try! fetchResultController.performFetch()
+        return fetchResultController as! NSFetchedResultsController<UserImageData>
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -73,7 +89,12 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         gallaryCollectionView.roundtheCorners(corner: 15, maskableCorners: [.layerMinXMinYCorner , .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         mapView.roundtheCorners(corner: 15, maskableCorners: [.layerMaxXMinYCorner ,  .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         getData()
+        for item in fetchedResultController1.fetchedObjects!
+        {
+            self.gallaryImageUrl.append(item.urlImage!)
         }
+    }
+    
     func getData()
     {
         let url = URL(string: "http://dummy.restapiexample.com/api/v1/employee/\(empId)")
@@ -101,7 +122,13 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Employee Details"
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
+        self.gallaryImageUrl.removeAll()
+        for item in fetchedResultController1.fetchedObjects!
+        {
+            self.gallaryImageUrl.append(item.urlImage!)
+        }
     }
+  
     
     func getEmpId(_ empId: String) {
         self.empId = empId
@@ -151,7 +178,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         mapView.isHidden = true
         galleryButton.setTitleColor(.white , for: .normal)
         imageAddButton.setTitleColor(.white , for: .normal)
-        
         gallaryCollectionView.isHidden = false
         gallerybuttonUIView.layer.backgroundColor = UIColor.init(white: 1.0, alpha: 0).cgColor
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
@@ -234,11 +260,24 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
 extension EmployeeDetails : UICollectionViewDataSource , UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return self.gallaryImageUrl.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = gallaryCollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
+        do{
+            let url = self.gallaryImageUrl[indexPath.row]
+            guard let imageURL = URL(string: url) else
+            {
+                return cell }
+            UIImage.loadImage(url: imageURL) { image in
+                if let image = image {
+                    cell.imageView.image = image
+                    cell.titleLabel.text = "Image\(indexPath.row + 1)"
+                }
+            }
+        }
         return cell
     }
 }
@@ -246,10 +285,10 @@ extension EmployeeDetails : UICollectionViewDataSource , UICollectionViewDelegat
 extension EmployeeDetails : UIImagePickerControllerDelegate , UINavigationControllerDelegate
 {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        profilePictureImage.image = image
+        let imageurl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
+        let myString = imageurl.absoluteString
+        addimageInGallary(location: myString!)
         dismiss(animated: true, completion: nil)
-        
     }
     
 }
@@ -264,5 +303,14 @@ extension EmployeeDetails
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("unable to access your Current Location")
     }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        //print("update in db")
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        //print("update in db done")
+        self.gallaryCollectionView.reloadData()
+    }
+    
 }
 
