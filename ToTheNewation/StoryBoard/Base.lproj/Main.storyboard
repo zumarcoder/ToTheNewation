@@ -543,16 +543,24 @@
                                     <action selector="onLoadMoreButtonTap:" destination="kvk-VR-W6T" eventType="touchUpInside" id="84F-u2-hfH"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJT-Bc-xli">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Qfa-m9-OFE" firstAttribute="trailing" secondItem="mPk-41-2zU" secondAttribute="trailing" constant="25" id="0gM-xY-vNV"/>
                             <constraint firstItem="Qfa-m9-OFE" firstAttribute="bottom" secondItem="mPk-41-2zU" secondAttribute="bottom" constant="25" id="9JH-6e-vVc"/>
+                            <constraint firstItem="Qfa-m9-OFE" firstAttribute="trailing" secondItem="gJT-Bc-xli" secondAttribute="trailing" id="MZB-eo-SLn"/>
+                            <constraint firstItem="Qfa-m9-OFE" firstAttribute="bottom" secondItem="gJT-Bc-xli" secondAttribute="bottom" id="OQF-sG-3PI"/>
                             <constraint firstItem="Uck-ue-4B4" firstAttribute="centerX" secondItem="nQn-xJ-Eic" secondAttribute="centerX" id="Pgt-bq-IUz"/>
                             <constraint firstItem="Qfa-m9-OFE" firstAttribute="bottom" secondItem="LWY-tD-0DJ" secondAttribute="bottom" id="TBH-i3-raq"/>
                             <constraint firstItem="LWY-tD-0DJ" firstAttribute="top" secondItem="Qfa-m9-OFE" secondAttribute="top" id="TLL-tx-PIB"/>
                             <constraint firstItem="Qfa-m9-OFE" firstAttribute="trailing" secondItem="LWY-tD-0DJ" secondAttribute="trailing" id="gfp-ee-Y07"/>
+                            <constraint firstItem="gJT-Bc-xli" firstAttribute="leading" secondItem="Qfa-m9-OFE" secondAttribute="leading" id="h2J-Sm-ofr"/>
                             <constraint firstItem="Uck-ue-4B4" firstAttribute="centerY" secondItem="nQn-xJ-Eic" secondAttribute="centerY" id="kiv-hx-D37"/>
+                            <constraint firstItem="gJT-Bc-xli" firstAttribute="top" secondItem="Qfa-m9-OFE" secondAttribute="top" id="mwO-vH-NJF"/>
                             <constraint firstItem="LWY-tD-0DJ" firstAttribute="leading" secondItem="Qfa-m9-OFE" secondAttribute="leading" id="ujD-hI-7h3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qfa-m9-OFE"/>
@@ -562,6 +570,7 @@
                         <outlet property="activityIndicator" destination="Uck-ue-4B4" id="gOf-jY-klx"/>
                         <outlet property="galleryCollectionView" destination="LWY-tD-0DJ" id="1iH-O5-jCT"/>
                         <outlet property="loadMoreButton" destination="mPk-41-2zU" id="uk2-b9-BRR"/>
+                        <outlet property="welcomeToGallaryView" destination="gJT-Bc-xli" id="enD-0g-LTR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZAH-GX-YNe" userLabel="First Responder" sceneMemberID="firstResponder"/>

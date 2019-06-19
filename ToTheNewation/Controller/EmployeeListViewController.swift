@@ -21,6 +21,8 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     var arraydata = [EmployeeStruct]()
     var isSearching = false
     var filteredData = [EmployeeStruct]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     
     override func viewDidLoad() {
 //        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
@@ -43,7 +45,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     
     
     func showSearchBar() {
-        let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
@@ -86,10 +87,18 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = "Employee List"
+        if(self.searchController == nil)
+        {
+            showSearchBar()
+        }else{
+            self.definesPresentationContext = true
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tableView.deselectSelectedRow(animated: true)
+        self.searchController.dismiss(animated: true, completion: nil)
     }
 }
 

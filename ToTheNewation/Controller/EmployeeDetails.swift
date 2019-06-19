@@ -217,11 +217,11 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
-        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-            let controller = storyBoard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
-            self.navigationController?.pushViewController(controller, animated: true)
-        }))
+//        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
+//            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let controller = storyBoard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }))
         
         actionStyleSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil ))
         self.present(actionStyleSheet, animated: true, completion: nil)
