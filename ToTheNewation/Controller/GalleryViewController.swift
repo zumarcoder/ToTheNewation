@@ -32,7 +32,7 @@ class GalleryViewController: UIViewController , UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "Gallery"
+        self.navigationController?.navigationBar.topItem?.title = "Google Search"
         if(self.searchController == nil)
         {
             showSearchBar()
