@@ -21,7 +21,7 @@ extension UILabel : Toastable
         self.alpha = 1.0
         self.layer.cornerRadius = 10
         self.clipsToBounds  =  true
-        UIView.animate(withDuration: 5.0, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
             self.alpha = 0.0
         }, completion: {(isCompleted) in
             self.isHidden = true

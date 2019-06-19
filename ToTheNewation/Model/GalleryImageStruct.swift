@@ -17,6 +17,7 @@ struct GoogleApi: Decodable {
 
 struct SubItems: Decodable{
     let title: String
+    let link : String
     let image: SubImageInfo
 }
 

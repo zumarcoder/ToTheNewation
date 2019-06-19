@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB , NSFetchedResultsControllerDelegate
+class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB , NSFetchedResultsControllerDelegate 
 {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var profilePictureBaseView : UIView!
@@ -28,6 +28,8 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     @IBOutlet weak var gallaryCollectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var galleryandmapViewCombinedView: UIView!
+    @IBOutlet weak var toastLabel: UILabel!
+    
     
     var arraydata = [EmployeeStruct]()
     var empId = ""
@@ -121,7 +123,14 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Employee Details"
+        mapView.isHidden = true
+        galleryButton.setTitleColor(.white , for: .normal)
+        imageAddButton.setTitleColor(.white , for: .normal)
+        gallaryCollectionView.isHidden = false
+        gallerybuttonUIView.layer.backgroundColor = UIColor.init(white: 1.0, alpha: 0).cgColor
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
+        mapButton.setTitleColor(.black , for: .normal)
+        addAnnotationButton.setTitleColor(.black , for: .normal)
         self.gallaryImageUrl.removeAll()
         for item in fetchedResultController1.fetchedObjects!
         {
@@ -138,7 +147,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         mapView.isHidden = true
         galleryButton.setTitleColor(.white , for: .normal)
         imageAddButton.setTitleColor(.white , for: .normal)
-
         gallaryCollectionView.isHidden = false
         gallerybuttonUIView.layer.backgroundColor = UIColor.init(white: 1.0, alpha: 0).cgColor
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
@@ -165,13 +173,21 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         gallaryCollectionView.isHidden = true
         mapButton.setTitleColor(.white , for: .normal)
         addAnnotationButton.setTitleColor(.white , for: .normal)
-        
         mapView.isHidden = false
         locationbuttonUIView.layer.backgroundColor = UIColor.init(white: 1.0, alpha: 0).cgColor
         gallerybuttonUIView.layer.backgroundColor = UIColor.white.cgColor
         galleryButton.setTitleColor(.black , for: .normal)
         imageAddButton.setTitleColor(.black, for: .normal)
-        anotationDeployingStatus = true
+        if(anotationDeployingStatus)
+        {
+            anotationDeployingStatus = false
+            toastLabel.toastMessageLabel(message: "Choose Your Location disabled")
+        }
+        else
+        {
+            anotationDeployingStatus = true
+            toastLabel.toastMessageLabel(message: "Choose Your Location")
+        }
     }
 
     @IBAction func onimageAddTap(_ sender: Any) {

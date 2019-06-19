@@ -149,22 +149,19 @@
                                     <constraint firstAttribute="height" constant="50" id="2D1-sv-FFw"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6Sk-5p-BBI"/>
-                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="29A-Zb-M8z"/>
-                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6qd-kN-493"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="i3B-uO-lfW" secondAttribute="bottom" id="BGO-bl-3ea"/>
                             <constraint firstItem="fdN-Ep-aZQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Dmj-3v-UUa"/>
+                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="P6y-VS-Ll1"/>
+                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="atk-y0-kOi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="i3B-uO-lfW" secondAttribute="trailing" id="fcb-F3-eJp"/>
                             <constraint firstItem="fdN-Ep-aZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iXy-4Z-ge7"/>
                             <constraint firstItem="i3B-uO-lfW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="omK-Mp-moy"/>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGi-lo-mId"/>
-                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="fdN-Ep-aZQ" secondAttribute="bottom" id="xBl-ih-1dO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -176,6 +173,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="Eh6-dU-rdu"/>
             </objects>
             <point key="canvasLocation" x="1944.8" y="-846.02698650674665"/>
         </scene>
@@ -445,13 +443,26 @@
                                                     <constraint firstAttribute="bottom" secondItem="5T4-3N-QxC" secondAttribute="bottom" constant="5" id="yZQ-C5-Y9m"/>
                                                 </constraints>
                                             </view>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFF-WK-73D">
+                                                <rect key="frame" x="67.5" y="445" width="240" height="40"/>
+                                                <color key="backgroundColor" red="0.70927852027157356" green="0.70927852027157356" blue="0.70927852027157356" alpha="0.5118792808219178" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="IpI-47-zFf"/>
+                                                    <constraint firstAttribute="width" constant="240" id="VKl-o0-bdY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="zFF-WK-73D" firstAttribute="centerX" secondItem="d2X-m9-4f8" secondAttribute="centerX" id="4zO-Lq-Ld9"/>
                                             <constraint firstAttribute="trailing" secondItem="TZg-s0-poQ" secondAttribute="trailing" constant="20" id="7rf-zq-bbY"/>
                                             <constraint firstItem="nVM-ss-eWH" firstAttribute="top" secondItem="TZg-s0-poQ" secondAttribute="bottom" constant="20" id="MWc-3c-IjU"/>
                                             <constraint firstItem="nVM-ss-eWH" firstAttribute="height" secondItem="d2X-m9-4f8" secondAttribute="height" multiplier="0.7" id="Mw0-ZM-5gL"/>
                                             <constraint firstItem="TZg-s0-poQ" firstAttribute="top" secondItem="d2X-m9-4f8" secondAttribute="top" constant="10" id="aIn-ne-nZ7"/>
+                                            <constraint firstItem="zFF-WK-73D" firstAttribute="centerY" secondItem="d2X-m9-4f8" secondAttribute="centerY" multiplier="1.5" id="eJr-Kf-RFZ"/>
                                             <constraint firstAttribute="trailing" secondItem="nVM-ss-eWH" secondAttribute="trailing" constant="20" id="elD-7I-Shn"/>
                                             <constraint firstItem="nVM-ss-eWH" firstAttribute="leading" secondItem="d2X-m9-4f8" secondAttribute="leading" constant="20" id="fkP-g3-OBc"/>
                                             <constraint firstAttribute="bottom" secondItem="nVM-ss-eWH" secondAttribute="bottom" constant="10" id="rz7-Gs-KSC"/>
@@ -496,6 +507,7 @@
                         <outlet property="profilePictureBaseView" destination="Uye-iO-EJz" id="IJg-mq-G2X"/>
                         <outlet property="profilePictureImage" destination="bVU-UT-6h2" id="PkQ-M3-6Uf"/>
                         <outlet property="salaryLabel" destination="a9W-IC-WhK" id="H7h-Yf-NTw"/>
+                        <outlet property="toastLabel" destination="zFF-WK-73D" id="lvx-ko-SZe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8lI-0c-jku" userLabel="First Responder" sceneMemberID="firstResponder"/>
