@@ -18,6 +18,7 @@ class AgreementViewController : UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        agreementTextView.scrollRangeToVisible(NSRange(location:0, length:0))
         agreementTextView.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0)
         agreementTextView.roundtheCorners(corner: 10, maskableCorners: [.layerMinXMinYCorner , .layerMaxXMinYCorner])
         closeButton.roundtheCorners(corner: 10, maskableCorners: .layerMinXMaxYCorner)
@@ -32,8 +33,11 @@ class AgreementViewController : UIViewController
 //            self.navigationController?.pushViewController(controller, animated: false)
 //        }
 //    }
-    //ascjnjdkncjksdnjkvnjksnvlksd
-    //hjgjhgjgjhgbjk
+    
+    override func viewWillAppear(_ animated: Bool) {
+        agreementTextView.scrollRangeToVisible(NSRange(location:0, length:0))
+    }
+    
     @IBAction func onCloseButtonTap(_ sender: Any) {
         exit(0)
     }
