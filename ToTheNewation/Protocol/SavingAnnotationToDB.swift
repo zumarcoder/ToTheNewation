@@ -14,7 +14,7 @@ protocol SavingDataToDB
 {
     //declaration
     func addData(name : String , longitude : Double , latitude : Double)
-    func addimageInGallary(location : String)
+    func addimageInGallary(location : String , username : String)
 }
 
 extension SavingDataToDB
@@ -41,7 +41,7 @@ extension SavingDataToDB
         }
     }
     
-    func addimageInGallary(location : String)
+    func addimageInGallary(location : String , username : String)
     {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else
         {
@@ -51,6 +51,7 @@ extension SavingDataToDB
         let entity = NSEntityDescription.entity(forEntityName: "UserImageData", in: context)
         let urls = NSManagedObject(entity: entity!, insertInto: context)
         urls.setValue(location , forKey: "urlImage")
+        urls.setValue(username, forKey: "userName")
         do
         {
             try context.save()

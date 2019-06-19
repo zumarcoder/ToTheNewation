@@ -131,7 +131,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i3B-uO-lfW">
-                                <rect key="frame" x="0.0" y="166" width="375" height="452"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Ck2-Ce-73Q"/>
@@ -143,23 +143,13 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fdN-Ep-aZQ">
-                                <rect key="frame" x="0.0" y="116" width="375" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="2D1-sv-FFw"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="29A-Zb-M8z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="i3B-uO-lfW" secondAttribute="bottom" id="BGO-bl-3ea"/>
-                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Dmj-3v-UUa"/>
-                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="P6y-VS-Ll1"/>
-                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="atk-y0-kOi"/>
+                            <constraint firstItem="i3B-uO-lfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="V9G-0n-WwM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="i3B-uO-lfW" secondAttribute="trailing" id="fcb-F3-eJp"/>
-                            <constraint firstItem="fdN-Ep-aZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iXy-4Z-ge7"/>
                             <constraint firstItem="i3B-uO-lfW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="omK-Mp-moy"/>
                             <constraint firstItem="GxN-O4-UpM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGi-lo-mId"/>
                         </constraints>
@@ -168,7 +158,6 @@
                     <navigationItem key="navigationItem" id="MfW-OT-Ouh"/>
                     <connections>
                         <outlet property="activityIndicator" destination="GxN-O4-UpM" id="mjn-oq-f19"/>
-                        <outlet property="searchBar" destination="fdN-Ep-aZQ" id="p8Y-K1-7Jq"/>
                         <outlet property="tableView" destination="i3B-uO-lfW" id="07G-gd-Fcw"/>
                     </connections>
                 </viewController>

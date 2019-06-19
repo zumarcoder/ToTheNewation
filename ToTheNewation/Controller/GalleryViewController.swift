@@ -38,22 +38,32 @@ class GalleryViewController: UIViewController {
         let url = URL(string: "https://www.googleapis.com/customsearch/v1?q=mango&cx=014779335774980121077%3Aj4u2pcebgfi&searchType=image&key=AIzaSyDFQJjdsS7BbaEUQYfbwOT93j00GO9kKQw&start=\(startIndex)&num=\(numberofItems)")
         URLSession.shared.dataTask(with: url!) { ( data , response , error ) in
             do{
-                let tempApiResponse = try JSONDecoder().decode(GoogleApi.self, from: data!)
-                DispatchQueue.main.async {
-                    var tempoArrayImageUrl = [String]()
-                    var tempoArrayImageTitle = [String]()
-                    for items in 0...9
-                    {
-                        tempoArrayImageUrl.append(tempApiResponse.items[items].image.thumbnailLink)
-                        tempoArrayImageTitle.append(tempApiResponse.items[items].title)
-                    }
-                    
-                    self.selectedDataFilling(arrayDataImageUrl: tempoArrayImageUrl, arrayDataTitleUrl: tempoArrayImageTitle)
+                 if error == nil
+                 {
+                    let tempApiResponse = try JSONDecoder().decode(GoogleApi.self, from: data!)
                     DispatchQueue.main.async {
-                        self.galleryCollectionView.reloadData()
-                        self.activityIndicator.stopAnimating()
+                        var tempoArrayImageUrl = [String]()
+                        var tempoArrayImageTitle = [String]()
+                        for items in 0...9
+                        {
+                            tempoArrayImageUrl.append(tempApiResponse.items[items].image.thumbnailLink)
+                            tempoArrayImageTitle.append(tempApiResponse.items[items].title)
+                        }
+                        
+                        self.selectedDataFilling(arrayDataImageUrl: tempoArrayImageUrl, arrayDataTitleUrl: tempoArrayImageTitle)
+                        DispatchQueue.main.async {
+                            self.galleryCollectionView.reloadData()
+                            self.activityIndicator.stopAnimating()
+                        }
                     }
                 }
+                 else
+                 {
+                    let alert = UIAlertController(title: "Something Wrong Happened", message: "Tap retry to try again", preferredStyle:.alert)
+                    alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
+                    self.present(alert, animated: true, completion: nil)
+                }
+
             }
             catch
             {

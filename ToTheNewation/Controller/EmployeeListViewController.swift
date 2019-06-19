@@ -9,7 +9,7 @@
 import UIKit
 
 protocol Gettable {
-    func getEmpId(_ empId: String)
+    func getEmpId(_ empId: String , _ empName : String)
 }
 
 
@@ -23,7 +23,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     var filteredData = [EmployeeStruct]()
     
     override func viewDidLoad() {
-        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+//        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         self.tabBarController?.tabBar.layer.masksToBounds = false
         self.tabBarController?.tabBar.layer.shadowColor = UIColor.black.cgColor
         self.tabBarController?.tabBar.layer.shadowOpacity = 0.6
@@ -34,18 +34,28 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
         super.viewDidLoad()
         let nib = UINib.init(nibName: "EmployeeListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
-        searchBar.delegate  = self
-        searchBar.returnKeyType = UIReturnKeyType.done
         let tap = UITapGestureRecognizer(target: self.tableView, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         getData()
+        showSearchBar()
+    }
+    
+    
+    func showSearchBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Search employee name or ID"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.returnKeyType = UIReturnKeyType.done
     }
     
     func getData()
     {
         let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
-        
         URLSession.shared.dataTask(with: url!) { ( data , response , error ) in
             do{
                 if error == nil
@@ -68,7 +78,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
             catch
             {
                 
-                print("Error in getData()")
+                print(error.localizedDescription)
             }
             }.resume()
     }
@@ -115,21 +125,23 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isSearching{
             let id = filteredData[indexPath.row].id
+            let name = filteredData[indexPath.row].employee_name
             let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
             let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
             var delegate: Gettable!
             delegate.self = controller
-            delegate.getEmpId(id)
+            delegate.getEmpId(id , name)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         else
         {
             let id = arraydata[indexPath.row].id
+            let name = arraydata[indexPath.row].employee_name
             let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
             let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
             var delegate: Gettable!
             delegate.self = controller
-            delegate.getEmpId(id)
+            delegate.getEmpId(id , name)
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

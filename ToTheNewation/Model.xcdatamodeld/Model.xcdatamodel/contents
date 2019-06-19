@@ -7,9 +7,10 @@
     </entity>
     <entity name="UserImageData" representedClassName="UserImageData" syncable="YES" codeGenerationType="class">
         <attribute name="urlImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Annotation" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="UserImageData" positionX="-45" positionY="27" width="128" height="60"/>
+        <element name="UserImageData" positionX="-45" positionY="27" width="128" height="75"/>
     </elements>
 </model>

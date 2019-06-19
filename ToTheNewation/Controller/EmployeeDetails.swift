@@ -35,6 +35,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     var empId = ""
     let locationManager = CLLocationManager()
     var anotationDeployingStatus = false
+    var name = ""
     var gallaryImageUrl = [String]()
     var galarytitle = [String]()
 
@@ -59,7 +60,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         mapView.mapType = MKMapType.standard
         mapView.showsUserLocation = true
         depthEffect(element: detailsView, shadowColor: UIColor.black, shadowOpacity: 1, shadowOffSet:  CGSize(width: 0, height: 1.6), shadowRadius: 4)
-        depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+//        depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 1, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         let tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped(sender:)))
         tap.delegate = self
         profilePictureBaseView.addGestureRecognizer(tap)
@@ -93,7 +94,11 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         getData()
         for item in fetchedResultController1.fetchedObjects!
         {
+            if item.userName == self.name
+            {
             self.gallaryImageUrl.append(item.urlImage!)
+            self.galarytitle.append(item.userName ?? "")
+            }
         }
     }
     
@@ -134,13 +139,19 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         self.gallaryImageUrl.removeAll()
         for item in fetchedResultController1.fetchedObjects!
         {
-            self.gallaryImageUrl.append(item.urlImage!)
+            if item.userName == self.name
+            {
+                self.gallaryImageUrl.append(item.urlImage!)
+                self.galarytitle.append(item.userName ?? "")
+            }
         }
     }
-  
     
-    func getEmpId(_ empId: String) {
+
+  
+    func getEmpId(_ empId: String , _ empName : String) {
         self.empId = empId
+        self.name = empName
     }
     
     @IBAction func onGalleryButtonTap(_ sender: Any) {
@@ -152,7 +163,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
         mapButton.setTitleColor(.black , for: .normal)
         addAnnotationButton.setTitleColor(.black , for: .normal)
-
     }
     
     @IBAction func onMapButtonTap(_ sender: Any) {
@@ -161,7 +171,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         locationManager.stopUpdatingLocation()
         mapButton.setTitleColor(.white , for: .normal)
         addAnnotationButton.setTitleColor(.white , for: .normal)
-
         mapView.isHidden = false
         locationbuttonUIView.layer.backgroundColor = UIColor.init(white: 1.0, alpha: 0).cgColor
         gallerybuttonUIView.layer.backgroundColor = UIColor.white.cgColor
@@ -203,7 +212,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         imagePickerController.delegate = self
         
         let actionStyleSheet = UIAlertController(title: "Photo Source", message: "Choose a Source", preferredStyle: .actionSheet)
-        
         actionStyleSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action : UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
@@ -284,13 +292,14 @@ extension EmployeeDetails : UICollectionViewDataSource , UICollectionViewDelegat
         let cell = gallaryCollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
         do{
             let url = self.gallaryImageUrl[indexPath.row]
+            let title = self.galarytitle[indexPath.row]
             guard let imageURL = URL(string: url) else
             {
                 return cell }
             UIImage.loadImage(url: imageURL) { image in
                 if let image = image {
                     cell.imageView.image = image
-                    cell.titleLabel.text = "Image\(indexPath.row + 1)"
+                    cell.titleLabel.text = title
                 }
             }
         }
@@ -303,7 +312,7 @@ extension EmployeeDetails : UIImagePickerControllerDelegate , UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imageurl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
         let myString = imageurl.absoluteString
-        addimageInGallary(location: myString!)
+        addimageInGallary(location: myString! , username: self.nameLabel?.text ?? "" )
         dismiss(animated: true, completion: nil)
     }
     
