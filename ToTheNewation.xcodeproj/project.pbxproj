@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		38118B802279782700E8974D /* EmployeeListStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38118B7F2279782700E8974D /* EmployeeListStruct.swift */; };
+		3816D74222BB80B100A22D7D /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3816D74122BB80B100A22D7D /* GalleryViewController.swift */; };
 		381FCB262269DD7D002B5E96 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FCB252269DD7D002B5E96 /* MapViewController.swift */; };
-		381FCB282269DD9F002B5E96 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FCB272269DD9F002B5E96 /* GalleryViewController.swift */; };
+		381FCB282269DD9F002B5E96 /* GoogleImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FCB272269DD9F002B5E96 /* GoogleImagesViewController.swift */; };
 		381FCB2A2269DDD4002B5E96 /* LoginSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381FCB292269DDD4002B5E96 /* LoginSignupViewController.swift */; };
 		3836386D22A6E1D800FDCA90 /* TransparentNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3836386C22A6E1D800FDCA90 /* TransparentNavBar.swift */; };
 		384D6ADC22A4FC530002543C /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D6ADB22A4FC520002543C /* AgreementViewController.swift */; };
@@ -36,8 +37,9 @@
 
 /* Begin PBXFileReference section */
 		38118B7F2279782700E8974D /* EmployeeListStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListStruct.swift; sourceTree = "<group>"; };
+		3816D74122BB80B100A22D7D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		381FCB252269DD7D002B5E96 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		381FCB272269DD9F002B5E96 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		381FCB272269DD9F002B5E96 /* GoogleImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleImagesViewController.swift; sourceTree = "<group>"; };
 		381FCB292269DDD4002B5E96 /* LoginSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignupViewController.swift; sourceTree = "<group>"; };
 		3836386C22A6E1D800FDCA90 /* TransparentNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavBar.swift; sourceTree = "<group>"; };
 		384D6ADB22A4FC520002543C /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
@@ -93,8 +95,9 @@
 				384D6ADD22A506720002543C /* RootTabBarController.swift */,
 				386DBCF72269933D00C2DA10 /* EmployeeListViewController.swift */,
 				38EA0A0D226DB4A2002E49CD /* EmployeeDetails.swift */,
-				381FCB272269DD9F002B5E96 /* GalleryViewController.swift */,
+				381FCB272269DD9F002B5E96 /* GoogleImagesViewController.swift */,
 				38D22F1422A0568000621CB9 /* PopoutGalleryImage.swift */,
+				3816D74122BB80B100A22D7D /* GalleryViewController.swift */,
 				381FCB252269DD7D002B5E96 /* MapViewController.swift */,
 				381FCB292269DDD4002B5E96 /* LoginSignupViewController.swift */,
 			);
@@ -271,11 +274,12 @@
 				38EA0A06226D8851002E49CD /* EmployeeListCell.swift in Sources */,
 				387B7C1E22A8F60A003B3E5F /* Toastable Label.swift in Sources */,
 				38EA0A0A226D8F23002E49CD /* Elementroundable.swift in Sources */,
-				381FCB282269DD9F002B5E96 /* GalleryViewController.swift in Sources */,
+				381FCB282269DD9F002B5E96 /* GoogleImagesViewController.swift in Sources */,
 				3836386D22A6E1D800FDCA90 /* TransparentNavBar.swift in Sources */,
 				381FCB262269DD7D002B5E96 /* MapViewController.swift in Sources */,
 				38EA0A0C226DA2D0002E49CD /* Toastable.swift in Sources */,
 				38D22F1322A04CF600621CB9 /* GalleryImageStruct.swift in Sources */,
+				3816D74222BB80B100A22D7D /* GalleryViewController.swift in Sources */,
 				381FCB2A2269DDD4002B5E96 /* LoginSignupViewController.swift in Sources */,
 				386DBCF62269933D00C2DA10 /* AppDelegate.swift in Sources */,
 				38BDF5112270DA3C00495130 /* CollectionViewCell.swift in Sources */,

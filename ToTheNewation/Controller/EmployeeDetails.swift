@@ -128,6 +128,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Employee Details"
+        AppDelegate.AppUtility.lockOrientation(.all)
         mapView.isHidden = true
         galleryButton.setTitleColor(.white , for: .normal)
         imageAddButton.setTitleColor(.white , for: .normal)
@@ -224,12 +225,12 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }))
-        
-//        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
-//            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-//            let controller = storyBoard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }))
+        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
+            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let controller = storyBoard.instantiateViewController(withIdentifier: "GoogleImagesViewController") as! GoogleImagesViewController
+            UserDefaults.standard.set(self.nameLabel.text!, forKey: "sentName")
+            self.navigationController?.pushViewController(controller, animated: true)
+        }))
         
         actionStyleSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil ))
         self.present(actionStyleSheet, animated: true, completion: nil)

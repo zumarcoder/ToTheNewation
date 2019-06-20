@@ -17,6 +17,7 @@ class PopoutGalleryImage: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(.all)
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         AppDelegate.AppUtility.lockOrientation(.portrait)

@@ -64,6 +64,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(.all)
        self.navigationController?.navigationBar.topItem?.title = "Map"
         for item in fetchedResultController.fetchedObjects!
         {
