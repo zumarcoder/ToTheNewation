@@ -147,7 +147,15 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         }
     }
     
-
+    override func viewDidDisappear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.portrait)
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
   
     func getEmpId(_ empId: String , _ empName : String) {
         self.empId = empId

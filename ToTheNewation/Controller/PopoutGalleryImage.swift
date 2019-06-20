@@ -15,7 +15,21 @@ class PopoutGalleryImage: UIViewController {
         let nib = UINib.init(nibName: "CollectionViewCell", bundle: nil)
         popOutCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.portrait)
+    }
+    
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
 }
+
+
 
 extension PopoutGalleryImage
 : UICollectionViewDelegate , UICollectionViewDataSource

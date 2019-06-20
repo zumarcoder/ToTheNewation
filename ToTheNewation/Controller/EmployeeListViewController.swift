@@ -54,6 +54,18 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.portrait)
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+
+    
+    
     func getData()
     {
         let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")

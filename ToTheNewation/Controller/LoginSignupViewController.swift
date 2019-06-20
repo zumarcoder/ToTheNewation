@@ -94,13 +94,12 @@ class LoginSignupViewController: UIViewController {
         passwordEditTextSignup.roundTheView(corner: 10)
         profilePictureLogedinView.roundTheView(corner: profilePictureLogedinView.frame.height/2)
         logoutButtonLogedInView.roundTheView(corner: 5)
-        
         let tap = UITapGestureRecognizer(target: self.rootViewOfLoginAndSignup, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
     
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Login"
         if(UserDefaults.standard.bool(forKey: "loggedin"))
@@ -113,6 +112,14 @@ class LoginSignupViewController: UIViewController {
         }
     }
     
+        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+       AppDelegate.AppUtility.lockOrientation(.all)
+    }
     
     @IBAction func onTopLoginButtonTap(_ sender: Any) {
         loginView.isHidden = false
@@ -135,6 +142,9 @@ class LoginSignupViewController: UIViewController {
     @IBAction func onForgetPasswordButtonTap(_ sender: Any) {
         let alert = UIAlertController(title: "Forget Password", message: "Enter Email Address to reset password", preferredStyle:.alert)
         alert.addTextField(configurationHandler: textFieldHandler )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
         alert.addAction(UIAlertAction(title: "Reset", style: .default, handler: {action in self.resetPassword()}))
         self.present(alert, animated: true, completion: nil)
     }
@@ -546,6 +556,8 @@ class LoginSignupViewController: UIViewController {
     
     
     @IBAction func onLogOutButtonTap(_ sender: Any) {
+        self.emailEditTextLogin.text = ""
+        self.passwordEditTextLogin.text = ""
         UserDefaults.standard.set(false, forKey: "loggedin")
         UserDefaults.standard.set("nil", forKey: "fn")
         UserDefaults.standard.set("nil", forKey: "ln")

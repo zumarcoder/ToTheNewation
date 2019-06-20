@@ -44,7 +44,16 @@ class GalleryViewController: UIViewController , UISearchBarDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         searchController.dismiss(animated: true, completion: nil)
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.portrait)
     }
+    
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
     func showSearchBar() {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
@@ -155,6 +164,7 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
         else
         {
             self.imageArray.removeAll()
+            self.titleArray.removeAll()
             self.welcomeToGallaryView.isHidden = true
             getData()
         }

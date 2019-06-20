@@ -14,5 +14,24 @@ class TransparentNavBar : UINavigationController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    }
+}
+    
+//    override var shouldAutorotate: Bool{
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad){
+//            return true
+//        }else{
+//            return false
+//        }
+//    }
+//
+//
+//    override var supportedInterfaceOrientations:UIInterfaceOrientationMask {
+//        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad){
+//            return UIInterfaceOrientationMask.allButUpsideDown
+//        }else
+//        {
+//            return UIInterfaceOrientationMask.portrait
+//        }
+//    }
+   
 }
