@@ -45,7 +45,6 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(.all)
         self.navigationItem.title = "Google Image"
         if(self.searchController == nil)
         {
@@ -58,15 +57,12 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
     
     override func viewWillDisappear(_ animated: Bool) {
         searchController.dismiss(animated: true, completion: nil)
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
     }
-    
     
     override var shouldAutorotate: Bool {
         return true
     }
+
     
     func showSearchBar() {
         searchController.dimsBackgroundDuringPresentation = false

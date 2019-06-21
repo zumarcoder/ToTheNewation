@@ -42,7 +42,6 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(.all)
         self.navigationController?.navigationBar.topItem?.title = "Gallery"
         self.gallaryImageUrl.removeAll()
         self.galarytitle.removeAll()
@@ -53,16 +52,16 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
-    }
-    
     override var shouldAutorotate: Bool {
         return true
     }
-    
+
+    // triggers when the ViewController AutoRotates
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
 }
 
 extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDataSource

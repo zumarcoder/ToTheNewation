@@ -101,6 +101,9 @@ class LoginSignupViewController: UIViewController {
     
 
     override func viewWillAppear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.portrait)
         self.navigationController?.navigationBar.topItem?.title = "Login"
         if(UserDefaults.standard.bool(forKey: "loggedin"))
         {
@@ -118,7 +121,14 @@ class LoginSignupViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-       AppDelegate.AppUtility.lockOrientation(.all)
+//        this enables the orientation to all
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        AppDelegate.AppUtility.lockOrientation(.all)
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
     }
     
     @IBAction func onTopLoginButtonTap(_ sender: Any) {
@@ -466,9 +476,6 @@ class LoginSignupViewController: UIViewController {
             request.httpBody = httpBody
             let session = URLSession.shared
             session.dataTask(with: request) { (data, response, error) in
-                //            if let response = response {
-                //                print(response)
-                //            }
                 if let data = data {
                     do {
                         if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{

@@ -128,7 +128,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Employee Details"
-        AppDelegate.AppUtility.lockOrientation(.all)
         mapView.isHidden = true
         galleryButton.setTitleColor(.white , for: .normal)
         imageAddButton.setTitleColor(.white , for: .normal)
@@ -149,9 +148,6 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
     }
     
     override var shouldAutorotate: Bool {

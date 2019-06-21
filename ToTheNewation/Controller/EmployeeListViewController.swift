@@ -55,9 +55,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
     }
     
     override var shouldAutorotate: Bool {
@@ -98,7 +95,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.AppUtility.lockOrientation(.all)
         self.navigationController?.navigationBar.topItem?.title = "Employee List"
         if(self.searchController == nil)
         {

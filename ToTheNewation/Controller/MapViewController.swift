@@ -64,7 +64,6 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(.all)
        self.navigationController?.navigationBar.topItem?.title = "Map"
         for item in fetchedResultController.fetchedObjects!
         {
@@ -73,19 +72,12 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
             anotationn.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
             mapView.addAnnotation(anotationn)
         }
-//        print(fetchedResultController.fetchedObjects!.count)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
-    }
-    
     
     override var shouldAutorotate: Bool {
         return true
     }
+
     
     @objc func handleTap(_ gestureReconizer: UILongPressGestureRecognizer)
     {

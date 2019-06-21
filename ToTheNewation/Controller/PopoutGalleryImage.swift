@@ -17,17 +17,12 @@ class PopoutGalleryImage: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(.all)
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        AppDelegate.AppUtility.lockOrientation(.portrait)
     }
-    
     
     override var shouldAutorotate: Bool {
         return true
     }
-    
+
 }
 
 
@@ -36,7 +31,7 @@ extension PopoutGalleryImage
 : UICollectionViewDelegate , UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20000
+        return 10
     }
     
     
