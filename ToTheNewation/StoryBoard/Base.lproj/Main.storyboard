@@ -968,6 +968,7 @@ Cg
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" smartInsertDeleteType="no"/>
                                                 <connections>
                                                     <action selector="mailEditTextEditingDidEnd:" destination="Swn-tb-JiH" eventType="editingDidEnd" id="wAh-yA-P0T"/>
+                                                    <action selector="onLoginTextFieldEditingChanged:" destination="Swn-tb-JiH" eventType="editingChanged" id="TTA-Xg-WSJ"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yaB-Fm-YkY">

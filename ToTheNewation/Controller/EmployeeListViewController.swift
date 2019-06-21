@@ -48,7 +48,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.placeholder = "Search employee name or ID"
+        searchController.searchBar.placeholder = "Search employee name"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.returnKeyType = UIReturnKeyType.done

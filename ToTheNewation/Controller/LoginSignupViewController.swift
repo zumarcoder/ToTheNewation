@@ -572,6 +572,10 @@ class LoginSignupViewController: UIViewController {
         UserDefaults.standard.set("nil", forKey: "sub")
         self.hideProfileView()
     }
+
+    @IBAction func onLoginTextFieldEditingChanged(_ sender: Any) {
+        self.emailValidatedLabel.text = ""
+    }
     
 }
 
