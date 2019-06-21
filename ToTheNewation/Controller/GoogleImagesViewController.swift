@@ -19,6 +19,7 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
     var numberofItems = 10
     var imageArray = [String]()
     var titleArray = [String]()
+    var originalImageURLArray = [String]()
     var searchingImageString = ""
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -85,13 +86,15 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
                     DispatchQueue.main.async {
                         var tempoArrayImageUrl = [String]()
                         var tempoArrayImageTitle = [String]()
+                        var tempoArrayOriginalImageURL = [String]()
                         for items in 0...9
                         {
                             tempoArrayImageUrl.append(tempApiResponse.items[items].image.thumbnailLink)
                             tempoArrayImageTitle.append(tempApiResponse.items[items].title)
+                            tempoArrayOriginalImageURL.append(tempApiResponse.items[items].link)
                         }
                         
-                        self.selectedDataFilling(arrayDataImageUrl: tempoArrayImageUrl, arrayDataTitleUrl: tempoArrayImageTitle)
+                        self.selectedDataFilling(arrayDataImageUrl: tempoArrayImageUrl, arrayDataTitleUrl: tempoArrayImageTitle, arrayDataOriginalImageURL:tempoArrayOriginalImageURL)
                         DispatchQueue.main.async {
                             self.galleryCollectionView.reloadData()
                             self.activityIndicator.stopAnimating()
@@ -118,7 +121,7 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
         self.getData()
     }
     
-    func selectedDataFilling(arrayDataImageUrl : [String] , arrayDataTitleUrl : [String])
+    func selectedDataFilling(arrayDataImageUrl : [String] , arrayDataTitleUrl : [String] , arrayDataOriginalImageURL : [String] )
     {
         for item in arrayDataImageUrl
         {
@@ -127,6 +130,10 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
         for item in arrayDataTitleUrl
         {
             self.titleArray.append(item)
+        }
+        for item in arrayDataOriginalImageURL
+        {
+            self.originalImageURLArray.append(item)
         }
     }
 }
@@ -161,13 +168,14 @@ extension GoogleImagesViewController : UICollectionViewDelegate , UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         let imageurl = imageArray[indexPath.row]
+        let originalImageURL = originalImageURLArray[indexPath.row]
         let myString = UserDefaults.standard.string(forKey: "sentName")
-        addimageInGallary(location: imageurl , username: myString! )
+        addimageInGallary(location: imageurl , username: myString!, originalImage: originalImageURL )
         //self.searchController.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
-        //        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-//        let controller = storyBoard.instantiateViewController(withIdentifier: "PopoutGalleryImage") as! PopoutGalleryImage
-//        self.navigationController?.pushViewController(controller, animated: true)
+        //let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        //let controller = storyBoard.instantiateViewController(withIdentifier: "PopoutGalleryImage") as! PopoutGalleryImage
+        //self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

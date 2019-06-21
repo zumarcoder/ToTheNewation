@@ -9,11 +9,22 @@
 import UIKit
 
 class PopoutGalleryImage: UIViewController {
-    @IBOutlet weak var popOutCollectionView: UICollectionView!
+    @IBOutlet weak var popOutImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib.init(nibName: "CollectionViewCell", bundle: nil)
-        popOutCollectionView.register(nib, forCellWithReuseIdentifier: "collectionCell")
+        do{
+            let url = UserDefaults.standard.string(forKey: "BigImage")
+            guard let imageURL = URL(string: url!)
+                else
+            {
+                return
+            }
+            UIImage.loadImage(url: imageURL) { image in
+                if let image = image {
+                    self.popOutImageView.image = image
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -23,21 +34,4 @@ class PopoutGalleryImage: UIViewController {
         return true
     }
 
-}
-
-
-
-extension PopoutGalleryImage
-: UICollectionViewDelegate , UICollectionViewDataSource
-{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = popOutCollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
-        return cell
-    }
-    
 }

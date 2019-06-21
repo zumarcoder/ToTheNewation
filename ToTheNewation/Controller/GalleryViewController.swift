@@ -16,6 +16,7 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
     
     var gallaryImageUrl = [String]()
     var galarytitle = [String]()
+    var gallaryOriginalImageURL = [String]()
     
     fileprivate lazy var fetchedResultController1: NSFetchedResultsController<UserImageData> =
     {
@@ -38,6 +39,7 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
         {
                 self.gallaryImageUrl.append(item.urlImage!)
                 self.galarytitle.append(item.userName ?? "")
+                self.gallaryOriginalImageURL.append(item.originalImage!)
         }
     }
     
@@ -45,10 +47,12 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
         self.navigationController?.navigationBar.topItem?.title = "Gallery"
         self.gallaryImageUrl.removeAll()
         self.galarytitle.removeAll()
+        self.gallaryOriginalImageURL.removeAll()
         for item in fetchedResultController1.fetchedObjects!
         {
             self.gallaryImageUrl.append(item.urlImage!)
             self.galarytitle.append(item.userName ?? "")
+            self.gallaryOriginalImageURL.append(item.originalImage!)
         }
     }
     
@@ -86,7 +90,13 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             }
         }
         return cell
-
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UserDefaults.standard.set(self.gallaryOriginalImageURL[indexPath.row], forKey: "BigImage")
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "PopoutGalleryImage") as! PopoutGalleryImage
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

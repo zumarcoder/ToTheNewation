@@ -202,4 +202,9 @@ extension EmployeeListViewController : UISearchBarDelegate
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-    }}
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.isSearching = false
+        self.tableView.reloadData()
+    }
+}

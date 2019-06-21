@@ -38,6 +38,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     var name = ""
     var gallaryImageUrl = [String]()
     var galarytitle = [String]()
+    var gallaryOrignalImageURL = [String]()
 
     fileprivate lazy var fetchedResultController1: NSFetchedResultsController<UserImageData> =
     {
@@ -98,6 +99,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
             {
             self.gallaryImageUrl.append(item.urlImage!)
             self.galarytitle.append(item.userName ?? "")
+            self.gallaryOrignalImageURL.append(item.originalImage!)
             }
         }
     }
@@ -137,12 +139,15 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         mapButton.setTitleColor(.black , for: .normal)
         addAnnotationButton.setTitleColor(.black , for: .normal)
         self.gallaryImageUrl.removeAll()
+        self.galarytitle.removeAll()
+        self.gallaryOrignalImageURL.removeAll()
         for item in fetchedResultController1.fetchedObjects!
         {
             if item.userName == self.name
             {
                 self.gallaryImageUrl.append(item.urlImage!)
                 self.galarytitle.append(item.userName ?? "")
+                self.gallaryOrignalImageURL.append(item.originalImage!)
             }
         }
     }
@@ -213,24 +218,36 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         locationbuttonUIView.layer.backgroundColor = UIColor.white.cgColor
         mapButton.setTitleColor(.black , for: .normal)
         addAnnotationButton.setTitleColor(.black , for: .normal)
+        guard let viewRect = sender as? UIView else { // to specify the view where StyleSheet will Appear in ipad
+            return
+        }
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
+        let addImageActionStyleSheet = UIAlertController(title: "Photo Source", message: "Choose a Source" , preferredStyle: .actionSheet)
+        addImageActionStyleSheet.modalPresentationStyle = .popover
         
-        let actionStyleSheet = UIAlertController(title: "Photo Source", message: "Choose a Source", preferredStyle: .actionSheet)
-        actionStyleSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action : UIAlertAction) in
-            imagePickerController.sourceType = .photoLibrary
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-        actionStyleSheet.addAction(UIAlertAction(title: "Google Images", style: .default, handler: {(action : UIAlertAction) in
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-            let controller = storyBoard.instantiateViewController(withIdentifier: "GoogleImagesViewController") as! GoogleImagesViewController
-            UserDefaults.standard.set(self.nameLabel.text!, forKey: "sentName")
-            self.navigationController?.pushViewController(controller, animated: true)
-        }))
-        
-        actionStyleSheet.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil ))
-        self.present(actionStyleSheet, animated: true, completion: nil)
-
+        let photoLibrary = UIAlertAction(title: "Photo Library", style: .default) {  (action : UIAlertAction) in
+                        imagePickerController.sourceType = .photoLibrary
+                        self.present(imagePickerController, animated: true, completion: nil)
+            
+        }
+        let googleImage = UIAlertAction(title:"Google Image", style: .default) { (action : UIAlertAction) in
+                        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+                        let controller = storyBoard.instantiateViewController(withIdentifier: "GoogleImagesViewController") as! GoogleImagesViewController
+                        UserDefaults.standard.set(self.nameLabel.text!, forKey: "sentName")
+                        self.navigationController?.pushViewController(controller, animated: true)
+            
+        }
+        let cancel = UIAlertAction(title: "Cancel" , style: .cancel) { action in
+        }
+        addImageActionStyleSheet.addAction(cancel)
+        addImageActionStyleSheet.addAction(photoLibrary)
+        addImageActionStyleSheet.addAction(googleImage)
+        if let presenter = addImageActionStyleSheet.popoverPresentationController {
+            presenter.sourceView = viewRect;
+            presenter.sourceRect = viewRect.bounds;
+        }
+        present(addImageActionStyleSheet, animated: true, completion: nil)
     }
     
     @objc func viewTapped(sender: UITapGestureRecognizer) {
@@ -310,6 +327,14 @@ extension EmployeeDetails : UICollectionViewDataSource , UICollectionViewDelegat
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UserDefaults.standard.set(self.gallaryOrignalImageURL[indexPath.row], forKey: "BigImage")
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "PopoutGalleryImage") as! PopoutGalleryImage
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
 }
 
 extension EmployeeDetails : UIImagePickerControllerDelegate , UINavigationControllerDelegate
@@ -317,7 +342,9 @@ extension EmployeeDetails : UIImagePickerControllerDelegate , UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imageurl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
         let myString = imageurl.absoluteString
-        addimageInGallary(location: myString! , username: self.nameLabel?.text ?? "" )
+        let originalImageUrl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
+        let myString1 = imageurl.absoluteString
+        addimageInGallary(location: myString! , username: self.nameLabel?.text ?? "", originalImage: myString1! )
         dismiss(animated: true, completion: nil)
     }
     
