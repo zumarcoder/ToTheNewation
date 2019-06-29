@@ -5,6 +5,13 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="EmployeeList" representedClassName="EmployeeList" syncable="YES" codeGenerationType="class">
+        <attribute name="employee_age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="employee_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="employee_salary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profile_image" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="UserImageData" representedClassName="UserImageData" syncable="YES" codeGenerationType="class">
         <attribute name="originalImage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="urlImage" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,5 +20,6 @@
     <elements>
         <element name="Annotation" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="UserImageData" positionX="-45" positionY="27" width="128" height="88"/>
+        <element name="EmployeeList" positionX="-54" positionY="27" width="128" height="120"/>
     </elements>
 </model>

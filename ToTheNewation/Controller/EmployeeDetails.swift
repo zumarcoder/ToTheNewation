@@ -39,7 +39,8 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
     var gallaryImageUrl = [String]()
     var galarytitle = [String]()
     var gallaryOrignalImageURL = [String]()
-
+    
+    
     fileprivate lazy var fetchedResultController1: NSFetchedResultsController<UserImageData> =
     {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -51,7 +52,19 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         try! fetchResultController.performFetch()
         return fetchResultController as! NSFetchedResultsController<UserImageData>
     }()
-    
+    fileprivate lazy var fetchedResultController2: NSFetchedResultsController<EmployeeList> =
+    {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate?.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest = EmployeeList.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "employee_name", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "id == \(empId)")
+        let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultController.delegate = self
+        try! fetchResultController.performFetch()
+        return fetchResultController as! NSFetchedResultsController<EmployeeList>
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +130,17 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
                         self.ageLabel.text = result[0].employee_age
                         self.salaryLabel.text = result[0].employee_salary
                         self.idLabel.text = result[0].id
+                    }
+                }
+                else
+                {
+                    DispatchQueue.main.async {
+                        for item in self.fetchedResultController2.fetchedObjects!
+                        {
+                            self.nameLabel.text = item.employee_name
+                            self.ageLabel.text = item.employee_age
+                            self.salaryLabel.text = item.employee_salary
+                            self.idLabel.text = item.id                        }
                     }
                 }
             }

@@ -7,25 +7,40 @@
 //
 
 import UIKit
+import CoreData
 
 protocol Gettable {
     func getEmpId(_ empId: String , _ empName : String)
 }
 
 
-class EmployeeListViewController: UIViewController , UITextFieldDelegate {
+class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFetchedResultsControllerDelegate , SavingDataToDB {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar : UISearchBar!
     
     var arraydata = [EmployeeStruct]()
+    var arraydataFromDB = [EmployeeStruct]()
     var isSearching = false
     var filteredData = [EmployeeStruct]()
     let searchController = UISearchController(searchResultsController: nil)
     
-    
+    fileprivate lazy var fetchedResultController1: NSFetchedResultsController<EmployeeList> =
+    {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate?.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest = EmployeeList.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "employee_name", ascending: true)]
+        let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultController.delegate = self
+        try! fetchResultController.performFetch()
+        return fetchResultController as! NSFetchedResultsController<EmployeeList>
+    }()
+
     override func viewDidLoad() {
 //        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(urls[urls.count-1] as URL)
         self.tabBarController?.tabBar.layer.masksToBounds = false
         self.tabBarController?.tabBar.layer.shadowColor = UIColor.black.cgColor
         self.tabBarController?.tabBar.layer.shadowOpacity = 0.6
@@ -42,7 +57,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
         getData()
         showSearchBar()
     }
-    
     
     func showSearchBar() {
         searchController.dimsBackgroundDuringPresentation = false
@@ -61,8 +75,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
         return true
     }
 
-    
-    
     func getData()
     {
         let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
@@ -71,26 +83,70 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate {
                 if error == nil
                 {
                     self.arraydata = try JSONDecoder().decode([EmployeeStruct].self, from: data!)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.tableView.isHidden = false
-                        self.activityIndicator.stopAnimating()
-                    }
+                    self.getdatafromAPI()
+                    self.setdatatoDB()
                 }
                 else
                 {
-                    let alert = UIAlertController(title: "Something Wrong Happened", message: "Tap retry to try again", preferredStyle:.alert)
-                    alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
-                    self.present(alert, animated: true, completion: nil)
+                     self.getdatafromdb()
+//                   let alert = UIAlertController(title: "Something Wrong Happened", message: "Tap retry to try again", preferredStyle:.alert)
+//                    alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
+//                    self.present(alert, animated: true, completion: nil)
                 }
             }
                 
             catch
             {
-                
                 print(error.localizedDescription)
             }
             }.resume()
+    }
+    
+    func setdatatoDB()
+    {
+        DispatchQueue.main.async {
+            if self.arraydata.count == self.fetchedResultController1.fetchedObjects?.count
+            {
+                // do nothing
+            }
+            else
+            {
+                self.deleteingFromDb(name : Annotation.self)
+                self.deleteingFromDb(name: EmployeeList.self)
+                self.deleteingFromDb(name: UserImageData.self)
+                for item in self.arraydata
+                {
+                    self.addEmployeeData(id : item.id , employeename : item.employee_name , employeesalary : item.employee_salary , employeeage : item.employee_age , profileimage : item.profile_image)
+                }
+            }
+        }
+    }
+    
+    func getdatafromAPI()
+    {
+        DispatchQueue.main.async {
+            self.arraydataFromDB = self.arraydata
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func getdatafromdb()
+    {
+        DispatchQueue.main.async {
+            for item in self.fetchedResultController1.fetchedObjects!
+            {
+                var tempStruct = EmployeeStruct(id: item.id! , employee_name: item.employee_name! , employee_salary: item.employee_salary!, employee_age: item.employee_age! , profile_image: item.profile_image! )
+                self.arraydataFromDB.append(tempStruct)
+            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+            self.activityIndicator.stopAnimating()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +175,7 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         }
         else
         {
-            return arraydata.count
+            return arraydataFromDB.count
         }
     }
     
@@ -131,7 +187,7 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         }
         else
         {
-            cell.nameLabel.text = arraydata[indexPath.row].employee_name
+            cell.nameLabel.text = arraydataFromDB[indexPath.row].employee_name
         }
         return cell
     }
@@ -153,8 +209,8 @@ extension EmployeeListViewController : UITableViewDelegate , UITableViewDataSour
         }
         else
         {
-            let id = arraydata[indexPath.row].id
-            let name = arraydata[indexPath.row].employee_name
+            let id = arraydataFromDB[indexPath.row].id
+            let name = arraydataFromDB[indexPath.row].employee_name
             let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
             let controller = storyBoard.instantiateViewController(withIdentifier: "EmployeeDetails") as! EmployeeDetails
             var delegate: Gettable!
@@ -189,7 +245,7 @@ extension EmployeeListViewController : UISearchBarDelegate
        else
         {
             isSearching = true
-            for item in arraydata
+            for item in arraydataFromDB
             {
                 if(item.employee_name.hasPrefix(searchBar.text!))
                 {
