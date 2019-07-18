@@ -54,6 +54,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         let tap = UITapGestureRecognizer(target: self.tableView, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        getdatafromdb()
         getData()
         showSearchBar()
     }
@@ -77,49 +78,63 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
 
     func getData()
     {
-        let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
-        URLSession.shared.dataTask(with: url!) { ( data , response , error ) in
-            do{
-                if error == nil
-                {
-                    self.arraydata = try JSONDecoder().decode([EmployeeStruct].self, from: data!)
-                    self.getdatafromAPI()
-                    self.setdatatoDB()
+        print("1")
+        DispatchQueue.main.async {
+            let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
+            URLSession.shared.dataTask(with: url!) { ( data , response , error ) in
+                do{
+                    if error == nil
+                    {
+                        self.arraydata = try JSONDecoder().decode([EmployeeStruct].self, from: data!)
+                        if self.arraydataFromDB.count == 0
+                        {
+                            DispatchQueue.main.sync {
+                                self.tableView.isHidden = true
+                                self.activityIndicator.startAnimating()
+                            }
+                            self.getdatafromAPI()
+                        }
+
+                            self.setdatatoDB()
+                    }
+                    else
+                    {
+                        self.getdatafromdb()
+                    }
                 }
-                else
+                    
+                catch
                 {
-                     self.getdatafromdb()
-//                   let alert = UIAlertController(title: "Something Wrong Happened", message: "Tap retry to try again", preferredStyle:.alert)
-//                    alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
-//                    self.present(alert, animated: true, completion: nil)
+                    print(error.localizedDescription)
+                    let alert = UIAlertController(title: "Something Wrong Happened", message: error.localizedDescription , preferredStyle:.alert)
+                    alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
+                    self.present(alert, animated: true, completion: nil)
                 }
-            }
-                
-            catch
-            {
-                print(error.localizedDescription)
-            }
-            }.resume()
+                print("1")
+                }.resume()
+        }
     }
     
     func setdatatoDB()
     {
-        DispatchQueue.main.async {
-            if self.arraydata.count == self.fetchedResultController1.fetchedObjects?.count
+        print(self.fetchedResultController1.fetchedObjects!)
+//        print(self.arraydata)
+            if self.arraydata.count == self.arraydataFromDB.count
             {
                 // do nothing
             }
             else
             {
-                self.deleteingFromDb(name : Annotation.self)
                 self.deleteingFromDb(name: EmployeeList.self)
-                self.deleteingFromDb(name: UserImageData.self)
+                //self.deleteingFromDb(name : Annotation.self)
+                //self.deleteingFromDb(name: UserImageData.self)
                 for item in self.arraydata
                 {
-                    self.addEmployeeData(id : item.id , employeename : item.employee_name , employeesalary : item.employee_salary , employeeage : item.employee_age , profileimage : item.profile_image)
+                    DispatchQueue.main.sync {
+                        self.addEmployeeData(id : item.id , employeename : item.employee_name , employeesalary : item.employee_salary , employeeage : item.employee_age , profileimage : item.profile_image)
+                    }
                 }
             }
-        }
     }
     
     func getdatafromAPI()
@@ -146,7 +161,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
             self.tableView.isHidden = false
             self.activityIndicator.stopAnimating()
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

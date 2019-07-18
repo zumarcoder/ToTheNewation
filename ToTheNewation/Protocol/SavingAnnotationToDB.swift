@@ -65,39 +65,43 @@ extension SavingDataToDB
     
     func addEmployeeData(id : String , employeename : String , employeesalary : String , employeeage : String , profileimage : String)
     {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else
-        {
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "EmployeeList", in: context)
-        let urls = NSManagedObject(entity: entity!, insertInto: context)
-        urls.setValue(id, forKey: "id")
-        urls.setValue(employeename , forKey: "employee_name")
-        urls.setValue(employeesalary, forKey: "employee_salary")
-        urls.setValue(employeeage, forKey: "employee_age")
-        urls.setValue(profileimage, forKey: "profile_image")
-        do
-        {
-            try context.save()
-        }catch let error as NSError
-        {
-            print("Could not save. \(error), \(error.userInfo)")
+        DispatchQueue.main.async{
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else
+            {
+                return
+            }
+            let context = appDelegate.persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "EmployeeList", in: context)
+            let urls = NSManagedObject(entity: entity!, insertInto: context)
+            urls.setValue(id, forKey: "id")
+            urls.setValue(employeename , forKey: "employee_name")
+            urls.setValue(employeesalary, forKey: "employee_salary")
+            urls.setValue(employeeage, forKey: "employee_age")
+            urls.setValue(profileimage, forKey: "profile_image")
+            do
+            {
+                try context.save()
+            }catch let error as NSError
+            {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
         }
     }
     
     func deleteingFromDb(name : AnyClass)
     {
-        // create the delete request for the specified entity
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = name.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        // get reference to the persistent container
-        let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        // perform the delete
-        do {
-            try persistentContainer.viewContext.execute(deleteRequest)
-        } catch let error as NSError {
-            print(error)
+        DispatchQueue.main.async {
+            // create the delete request for the specified entity
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = name.fetchRequest()
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            // get reference to the persistent container
+            let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            // perform the delete
+            do {
+                try persistentContainer.viewContext.execute(deleteRequest)
+            } catch let error as NSError {
+                print(error)
+            }
         }
     }
 }

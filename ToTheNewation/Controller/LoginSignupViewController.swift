@@ -111,6 +111,8 @@ class LoginSignupViewController: UIViewController {
         }
         else
         {
+            loginView.isHidden = false
+            signupView.isHidden = true
             hideProfileView()
         }
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EmployeeStruct : Decodable {
+struct EmployeeStruct : Decodable , Equatable {
     var id : String
     var employee_name : String
     var employee_salary : String
