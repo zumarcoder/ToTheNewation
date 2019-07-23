@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PopoutGalleryImage: UIViewController {
     @IBOutlet weak var popOutImageView: UIImageView!
@@ -25,6 +26,8 @@ class PopoutGalleryImage: UIViewController {
                 }
             }
         }
+        Analytics.logEvent("popoutvc_launched", parameters: nil)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import Firebase
 
 class GalleryViewController :UIViewController , NSFetchedResultsControllerDelegate
 {
@@ -27,7 +28,7 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultController.delegate = self
         try! fetchResultController.performFetch()
-        return fetchResultController as! NSFetchedResultsController<UserImageData>
+        return fetchResultController
     }()
     
     override func viewDidLoad() {
@@ -41,6 +42,7 @@ class GalleryViewController :UIViewController , NSFetchedResultsControllerDelega
                 self.galarytitle.append(item.userName ?? "")
                 self.gallaryOriginalImageURL.append(item.originalImage!)
         }
+        Analytics.logEvent("galleryvc_launched", parameters: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

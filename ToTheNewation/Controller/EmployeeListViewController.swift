@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 protocol Gettable {
     func getEmpId(_ empId: String , _ empName : String)
@@ -34,13 +35,12 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultController.delegate = self
         try! fetchResultController.performFetch()
-        return fetchResultController as! NSFetchedResultsController<EmployeeList>
+        return fetchResultController
     }()
 
     override func viewDidLoad() {
-//        self.depthEffect(element: self.navigationController!.navigationBar, shadowColor: UIColor.lightGray, shadowOpacity: 0.6, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print(urls[urls.count-1] as URL)
+//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        print(urls[urls.count-1] as URL)
         self.tabBarController?.tabBar.layer.masksToBounds = false
         self.tabBarController?.tabBar.layer.shadowColor = UIColor.black.cgColor
         self.tabBarController?.tabBar.layer.shadowOpacity = 0.6
@@ -57,6 +57,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         getdatafromdb()
         getData()
         showSearchBar()
+        Analytics.logEvent("employee_list_launched", parameters: nil)
     }
     
     func showSearchBar() {
@@ -78,7 +79,6 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
 
     func getData()
     {
-        print("1")
         DispatchQueue.main.async {
             let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
             URLSession.shared.dataTask(with: url!) { ( data , response , error ) in
@@ -110,14 +110,13 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
                     alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: {action in self.getData()}))
                     self.present(alert, animated: true, completion: nil)
                 }
-                print("1")
                 }.resume()
         }
     }
     
     func setdatatoDB()
     {
-        print(self.fetchedResultController1.fetchedObjects!)
+//        print(self.fetchedResultController1.fetchedObjects!)
 //        print(self.arraydata)
             if self.arraydata.count == self.arraydataFromDB.count
             {
@@ -152,7 +151,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         DispatchQueue.main.async {
             for item in self.fetchedResultController1.fetchedObjects!
             {
-                var tempStruct = EmployeeStruct(id: item.id! , employee_name: item.employee_name! , employee_salary: item.employee_salary!, employee_age: item.employee_age! , profile_image: item.profile_image! )
+                let tempStruct = EmployeeStruct(id: item.id! , employee_name: item.employee_name! , employee_salary: item.employee_salary!, employee_age: item.employee_age! , profile_image: item.profile_image! )
                 self.arraydataFromDB.append(tempStruct)
             }
         }
@@ -169,7 +168,9 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         if(self.searchController == nil)
         {
             showSearchBar()
-        }else{
+        }
+        else
+        {
             self.definesPresentationContext = true
         }
         

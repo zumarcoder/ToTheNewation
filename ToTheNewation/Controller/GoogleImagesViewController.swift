@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFetchedResultsControllerDelegate , SavingDataToDB {
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -32,7 +33,7 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultController.delegate = self
         try! fetchResultController.performFetch()
-        return fetchResultController as! NSFetchedResultsController<UserImageData>
+        return fetchResultController
     }()
     
     override func viewDidLoad() {
@@ -43,6 +44,7 @@ class GoogleImagesViewController: UIViewController , UISearchBarDelegate , NSFet
         self.loadMoreButton.roundTheView(corner: 10)
         depthEffect(element: self.loadMoreButton, shadowColor: UIColor.black, shadowOpacity: 2, shadowOffSet: CGSize(width: 0, height: 1.6), shadowRadius: 4)
         showSearchBar()
+        Analytics.logEvent("googleimagesvc_launched", parameters: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

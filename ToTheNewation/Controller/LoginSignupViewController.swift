@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginSignupViewController: UIViewController {
     
@@ -97,6 +98,7 @@ class LoginSignupViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self.rootViewOfLoginAndSignup, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        Analytics.logEvent("loginsignupvc_launched", parameters: nil)
     }
     
 
@@ -311,6 +313,7 @@ class LoginSignupViewController: UIViewController {
             self.fNamelNameLabelLogedInView.text = "\(UserDefaults.standard.string(forKey: "fn")!)  \(UserDefaults.standard.string(forKey: "ln")!)"
             self.userIDlabelLogedInView.text = UserDefaults.standard.string(forKey: "uid")
             self.subscribtionLogedInLabel.text = UserDefaults.standard.string(forKey: "sub")
+            Analytics.logEvent("usersloggedin", parameters: nil)
         }
     }
     

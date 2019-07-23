@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import Firebase
 
 class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate , MKMapViewDelegate , CLLocationManagerDelegate , SavingDataToDB , NSFetchedResultsControllerDelegate 
 {
@@ -50,7 +51,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultController.delegate = self
         try! fetchResultController.performFetch()
-        return fetchResultController as! NSFetchedResultsController<UserImageData>
+        return fetchResultController
     }()
     fileprivate lazy var fetchedResultController2: NSFetchedResultsController<EmployeeList> =
     {
@@ -62,7 +63,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
         fetchResultController.delegate = self
         try! fetchResultController.performFetch()
-        return fetchResultController as! NSFetchedResultsController<EmployeeList>
+        return fetchResultController
     }()
 
     
@@ -106,6 +107,7 @@ class EmployeeDetails: UIViewController, Gettable ,UIGestureRecognizerDelegate ,
         gallaryCollectionView.roundtheCorners(corner: 15, maskableCorners: [.layerMinXMinYCorner , .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         mapView.roundtheCorners(corner: 15, maskableCorners: [.layerMaxXMinYCorner ,  .layerMaxXMaxYCorner , .layerMinXMaxYCorner])
         getData()
+        Analytics.logEvent("employeedetailsvc_launched", parameters: nil)
         for item in fetchedResultController1.fetchedObjects!
         {
             if item.userName == self.name

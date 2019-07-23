@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import Firebase
 
 class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManagerDelegate , UIGestureRecognizerDelegate , NSFetchedResultsControllerDelegate {
     
@@ -19,7 +20,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
         let fetchRequest:NSFetchRequest = Annotation.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
-        fetchResultController.delegate = self as? NSFetchedResultsControllerDelegate
+        fetchResultController.delegate = self
         try! fetchResultController.performFetch()
         return fetchResultController
     }()
@@ -56,6 +57,7 @@ class MapViewController: UIViewController , MKMapViewDelegate , CLLocationManage
         }
         mapView.mapType = MKMapType.standard
         mapView.showsUserLocation = true
+        Analytics.logEvent("mapvc_launched", parameters: nil)
     }
     
     
