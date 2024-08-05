@@ -67,7 +67,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
-    } 
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
     }
@@ -114,6 +114,8 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
                 }.resume()
         }
     }
+    
+    
     
     func setdatatoDB()
     {
