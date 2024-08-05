@@ -67,7 +67,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
-    }
+    } 
     
     override func viewDidDisappear(_ animated: Bool) {
     }
@@ -77,7 +77,7 @@ class EmployeeListViewController: UIViewController , UITextFieldDelegate , NSFet
     }
 
     func getData()
-    { 
+    {
         print("1")
         DispatchQueue.main.async {
             let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")
